@@ -2,22 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.macro.mall.dao.CommonZoneDao">
     <resultMap id="zoneWorkerInfoMap" type="com.macro.mall.domain.ZoneWorkerInfo"
-               extends="com.macro.mall.mapper.YxxZoneWorkerMapper.BaseResultMap">
-        <result property="workerName" column="worker_name" jdbcType="VARCHAR"/>
-        <result property="workerIcon" column="worker_icon" jdbcType="VARCHAR"/>
-        <result property="workerTel" column="worker_tel" jdbcType="VARCHAR"/>
+               extends="com.macro.mall.mapper.YxxWorkerMapper.BaseResultMap">
+        <result property="joinTime" column="join_time" jdbcType="TIMESTAMP"/>
+        <result property="isAdmin" column="is_admin" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="zoneSkilledProductInfoMap" type="com.macro.mall.domain.ZoneSkilledProductInfo"
+               extends="com.macro.mall.mapper.YxxWorkerSkilledProductMapper.BaseResultMap">
+        <result property="productName" column="product_name" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="queryWorkersByZoneId" resultMap="zoneWorkerInfoMap">
-        select zw.id,
-               zw.worker_id,
-               zw.zone_id,
-               zw.is_admin,
-               yw.real_name worker_name,
-               yw.icon      worker_icon,
-               yw.phone     worker_tel
-        from yxx_zone_worker zw
-                     left join yxx_worker yw on zw.worker_id = yw.id
+        select yw.*,
+               zw.create_time join_time,
+               zw.is_admin
+        from yxx_worker yw
+                     left join yxx_zone_worker zw
+                on zw.worker_id = yw.id
         where zw.zone_id = #{zoneId,jdbcType=BIGINT}
+    </select>
+
+    <select id="querySkilledProInfoList" resultMap="zoneSkilledProductInfoMap">
+        select sp.id,
+               zone_id,
+               product_id,
+               p.name product_name
+        from yxx_zone_skilled_product sp
+                     left join pms_product p on sp.product_id = p.id
+        where sp.zone_id = #{zoneId,jdbcType=BIGINT}
     </select>
 </mapper>

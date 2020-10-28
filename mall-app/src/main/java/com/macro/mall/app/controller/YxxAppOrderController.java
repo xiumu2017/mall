@@ -61,7 +61,7 @@ public class YxxAppOrderController {
                                                        @RequestParam(required = false, defaultValue = "1") Integer pageNum,
                                                        @RequestParam(required = false, defaultValue = "5") Integer pageSize) {
         OrderQuery query = OrderQuery.builder().isBargain(isBargain).array(OrderStatusUtil.getStatusArray(status))
-                .startTime(getDate(year, month, 1)).endTime(getDate(year, month, 0))
+                .startTime(getDate(year, month, 1)).endTime(getDate(year, month, 0)).workerId(workerService.getCurrentWorker().getId())
                 .orderType(orderType).build();
         CommonPage<YxxOrderInfo> orderInfoCommonPage = orderCommonService.pageQueryInfo(query, pageNum, pageSize);
         // 进行中 历史订单

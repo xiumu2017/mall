@@ -12,11 +12,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 垚修修维修工信息表
+ * 
  *
  * @author Paradise
  */
-@ApiModel(value="垚修修维修工信息")
+@ApiModel(value="")
 @Data
 @Builder
 @AllArgsConstructor
@@ -51,6 +51,9 @@ public class YxxWorker implements Serializable {
 
     @ApiModelProperty(value="等级")
     private Integer levelId;
+
+    @ApiModelProperty(value="会员过期时间")
+    private Date levelExpireDate;
 
     @ApiModelProperty(value="服务地址")
     private String address;
@@ -113,6 +116,7 @@ public class YxxWorker implements Serializable {
         status("status", "status", "INTEGER", true),
         contractAddress("contract_address", "contractAddress", "VARCHAR", false),
         levelId("level_id", "levelId", "INTEGER", false),
+        levelExpireDate("level_expire_date", "levelExpireDate", "TIMESTAMP", false),
         address("address", "address", "VARCHAR", false),
         location("location", "location", "VARCHAR", true),
         serviceScore("service_score", "serviceScore", "INTEGER", false),

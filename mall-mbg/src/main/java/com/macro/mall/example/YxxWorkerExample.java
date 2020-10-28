@@ -1121,6 +1121,96 @@ public class YxxWorkerExample {
             return (Criteria) this;
         }
 
+        public Criteria andLevelExpireDateIsNull() {
+            addCriterion("level_expire_date is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelExpireDateIsNotNull() {
+            addCriterion("level_expire_date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelExpireDateEqualTo(Date value) {
+            addCriterion("level_expire_date =", value, "levelExpireDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelExpireDateEqualToColumn(YxxWorker.Column column) {
+            addCriterion(new StringBuilder("level_expire_date = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelExpireDateNotEqualTo(Date value) {
+            addCriterion("level_expire_date <>", value, "levelExpireDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelExpireDateNotEqualToColumn(YxxWorker.Column column) {
+            addCriterion(new StringBuilder("level_expire_date <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelExpireDateGreaterThan(Date value) {
+            addCriterion("level_expire_date >", value, "levelExpireDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelExpireDateGreaterThanColumn(YxxWorker.Column column) {
+            addCriterion(new StringBuilder("level_expire_date > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelExpireDateGreaterThanOrEqualTo(Date value) {
+            addCriterion("level_expire_date >=", value, "levelExpireDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelExpireDateGreaterThanOrEqualToColumn(YxxWorker.Column column) {
+            addCriterion(new StringBuilder("level_expire_date >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelExpireDateLessThan(Date value) {
+            addCriterion("level_expire_date <", value, "levelExpireDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelExpireDateLessThanColumn(YxxWorker.Column column) {
+            addCriterion(new StringBuilder("level_expire_date < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelExpireDateLessThanOrEqualTo(Date value) {
+            addCriterion("level_expire_date <=", value, "levelExpireDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelExpireDateLessThanOrEqualToColumn(YxxWorker.Column column) {
+            addCriterion(new StringBuilder("level_expire_date <= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelExpireDateIn(List<Date> values) {
+            addCriterion("level_expire_date in", values, "levelExpireDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelExpireDateNotIn(List<Date> values) {
+            addCriterion("level_expire_date not in", values, "levelExpireDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelExpireDateBetween(Date value1, Date value2) {
+            addCriterion("level_expire_date between", value1, value2, "levelExpireDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelExpireDateNotBetween(Date value1, Date value2) {
+            addCriterion("level_expire_date not between", value1, value2, "levelExpireDate");
+            return (Criteria) this;
+        }
+
         public Criteria andAddressIsNull() {
             addCriterion("address is null");
             return (Criteria) this;

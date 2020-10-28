@@ -12,6 +12,7 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="contract_address" jdbcType="VARCHAR" property="contractAddress" />
     <result column="level_id" jdbcType="INTEGER" property="levelId" />
+    <result column="level_expire_date" jdbcType="TIMESTAMP" property="levelExpireDate" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="location" jdbcType="VARCHAR" property="location" />
     <result column="service_score" jdbcType="INTEGER" property="serviceScore" />
@@ -89,9 +90,9 @@
   </sql>
   <sql id="Base_Column_List">
     id, username, real_name, sex, `password`, phone, `enable`, `status`, contract_address, 
-    level_id, address, `location`, service_score, icon, birthday, region_id, region, 
-    zone_id, wx_open_id, wx_union_id, parent_id, invitation_code, id_no, id_photo, create_time, 
-    update_time
+    level_id, level_expire_date, address, `location`, service_score, icon, birthday, 
+    region_id, region, zone_id, wx_open_id, wx_union_id, parent_id, invitation_code, 
+    id_no, id_photo, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.macro.mall.example.YxxWorkerExample" resultMap="BaseResultMap">
     select
@@ -168,21 +169,21 @@
     insert into yxx_worker (username, real_name, sex, 
       `password`, phone, `enable`, 
       `status`, contract_address, level_id, 
-      address, `location`, service_score, 
-      icon, birthday, region_id, 
-      region, zone_id, wx_open_id, 
-      wx_union_id, parent_id, invitation_code, 
-      id_no, id_photo, create_time, 
-      update_time)
+      level_expire_date, address, `location`, 
+      service_score, icon, birthday, 
+      region_id, region, zone_id, 
+      wx_open_id, wx_union_id, parent_id, 
+      invitation_code, id_no, id_photo, 
+      create_time, update_time)
     values (#{username,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
       #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{enable,jdbcType=INTEGER}, 
       #{status,jdbcType=INTEGER}, #{contractAddress,jdbcType=VARCHAR}, #{levelId,jdbcType=INTEGER}, 
-      #{address,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{serviceScore,jdbcType=INTEGER}, 
-      #{icon,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{regionId,jdbcType=BIGINT}, 
-      #{region,jdbcType=VARCHAR}, #{zoneId,jdbcType=BIGINT}, #{wxOpenId,jdbcType=VARCHAR}, 
-      #{wxUnionId,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, #{invitationCode,jdbcType=VARCHAR}, 
-      #{idNo,jdbcType=VARCHAR}, #{idPhoto,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{levelExpireDate,jdbcType=TIMESTAMP}, #{address,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
+      #{serviceScore,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
+      #{regionId,jdbcType=BIGINT}, #{region,jdbcType=VARCHAR}, #{zoneId,jdbcType=BIGINT}, 
+      #{wxOpenId,jdbcType=VARCHAR}, #{wxUnionId,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, 
+      #{invitationCode,jdbcType=VARCHAR}, #{idNo,jdbcType=VARCHAR}, #{idPhoto,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="map">
     <selectKey keyProperty="record.id" order="AFTER" resultType="java.lang.Long">
@@ -223,6 +224,9 @@
           </if>
           <if test="record.levelId != null">
             level_id,
+          </if>
+          <if test="record.levelExpireDate != null">
+            level_expire_date,
           </if>
           <if test="record.address != null">
             address,
@@ -311,6 +315,9 @@
           </if>
           <if test="record.levelId != null">
             #{record.levelId,jdbcType=INTEGER},
+          </if>
+          <if test="record.levelExpireDate != null">
+            #{record.levelExpireDate,jdbcType=TIMESTAMP},
           </if>
           <if test="record.address != null">
             #{record.address,jdbcType=VARCHAR},
@@ -411,6 +418,9 @@
           <if test="record.levelId != null">
             level_id = #{record.levelId,jdbcType=INTEGER},
           </if>
+          <if test="record.levelExpireDate != null">
+            level_expire_date = #{record.levelExpireDate,jdbcType=TIMESTAMP},
+          </if>
           <if test="record.address != null">
             address = #{record.address,jdbcType=VARCHAR},
           </if>
@@ -478,6 +488,7 @@
       `status` = #{record.status,jdbcType=INTEGER},
       contract_address = #{record.contractAddress,jdbcType=VARCHAR},
       level_id = #{record.levelId,jdbcType=INTEGER},
+      level_expire_date = #{record.levelExpireDate,jdbcType=TIMESTAMP},
       address = #{record.address,jdbcType=VARCHAR},
       `location` = #{record.location,jdbcType=VARCHAR},
       service_score = #{record.serviceScore,jdbcType=INTEGER},
@@ -535,6 +546,9 @@
           </if>
           <if test="record.levelId != null">
             level_id = #{record.levelId,jdbcType=INTEGER},
+          </if>
+          <if test="record.levelExpireDate != null">
+            level_expire_date = #{record.levelExpireDate,jdbcType=TIMESTAMP},
           </if>
           <if test="record.address != null">
             address = #{record.address,jdbcType=VARCHAR},
@@ -600,6 +614,7 @@
       `status` = #{status,jdbcType=INTEGER},
       contract_address = #{contractAddress,jdbcType=VARCHAR},
       level_id = #{levelId,jdbcType=INTEGER},
+      level_expire_date = #{levelExpireDate,jdbcType=TIMESTAMP},
       address = #{address,jdbcType=VARCHAR},
       `location` = #{location,jdbcType=VARCHAR},
       service_score = #{serviceScore,jdbcType=INTEGER},
@@ -654,20 +669,20 @@
   <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
     insert into yxx_worker
     (username, real_name, sex, `password`, phone, `enable`, `status`, contract_address, 
-      level_id, address, `location`, service_score, icon, birthday, region_id, region, 
-      zone_id, wx_open_id, wx_union_id, parent_id, invitation_code, id_no, id_photo, 
-      create_time, update_time)
+      level_id, level_expire_date, address, `location`, service_score, icon, birthday, 
+      region_id, region, zone_id, wx_open_id, wx_union_id, parent_id, invitation_code, 
+      id_no, id_photo, create_time, update_time)
     values
     <foreach collection="list" item="item" separator=",">
       (#{item.username,jdbcType=VARCHAR}, #{item.realName,jdbcType=VARCHAR}, #{item.sex,jdbcType=INTEGER}, 
         #{item.password,jdbcType=VARCHAR}, #{item.phone,jdbcType=VARCHAR}, #{item.enable,jdbcType=INTEGER}, 
         #{item.status,jdbcType=INTEGER}, #{item.contractAddress,jdbcType=VARCHAR}, #{item.levelId,jdbcType=INTEGER}, 
-        #{item.address,jdbcType=VARCHAR}, #{item.location,jdbcType=VARCHAR}, #{item.serviceScore,jdbcType=INTEGER}, 
-        #{item.icon,jdbcType=VARCHAR}, #{item.birthday,jdbcType=DATE}, #{item.regionId,jdbcType=BIGINT}, 
-        #{item.region,jdbcType=VARCHAR}, #{item.zoneId,jdbcType=BIGINT}, #{item.wxOpenId,jdbcType=VARCHAR}, 
-        #{item.wxUnionId,jdbcType=VARCHAR}, #{item.parentId,jdbcType=BIGINT}, #{item.invitationCode,jdbcType=VARCHAR}, 
-        #{item.idNo,jdbcType=VARCHAR}, #{item.idPhoto,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, 
-        #{item.updateTime,jdbcType=TIMESTAMP})
+        #{item.levelExpireDate,jdbcType=TIMESTAMP}, #{item.address,jdbcType=VARCHAR}, #{item.location,jdbcType=VARCHAR}, 
+        #{item.serviceScore,jdbcType=INTEGER}, #{item.icon,jdbcType=VARCHAR}, #{item.birthday,jdbcType=DATE}, 
+        #{item.regionId,jdbcType=BIGINT}, #{item.region,jdbcType=VARCHAR}, #{item.zoneId,jdbcType=BIGINT}, 
+        #{item.wxOpenId,jdbcType=VARCHAR}, #{item.wxUnionId,jdbcType=VARCHAR}, #{item.parentId,jdbcType=BIGINT}, 
+        #{item.invitationCode,jdbcType=VARCHAR}, #{item.idNo,jdbcType=VARCHAR}, #{item.idPhoto,jdbcType=VARCHAR}, 
+        #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP})
     </foreach>
   </insert>
   <insert id="batchInsertSelective" keyColumn="id" keyProperty="list.id" parameterType="map" useGeneratedKeys="true">
@@ -706,6 +721,9 @@
         </if>
         <if test="'level_id'.toString() == column.value">
           #{item.levelId,jdbcType=INTEGER}
+        </if>
+        <if test="'level_expire_date'.toString() == column.value">
+          #{item.levelExpireDate,jdbcType=TIMESTAMP}
         </if>
         <if test="'address'.toString() == column.value">
           #{item.address,jdbcType=VARCHAR}

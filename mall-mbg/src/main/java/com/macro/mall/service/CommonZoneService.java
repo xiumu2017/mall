@@ -2,10 +2,15 @@ package com.macro.mall.service;
 
 import com.github.pagehelper.PageHelper;
 import com.macro.mall.dao.CommonZoneDao;
+import com.macro.mall.domain.AppZoneInfo;
+import com.macro.mall.domain.ZoneSkilledProductInfo;
 import com.macro.mall.domain.ZoneWorkerInfo;
+import com.macro.mall.example.YxxZoneApplyExample;
+import com.macro.mall.example.YxxZoneExample;
 import com.macro.mall.mapper.*;
 import com.macro.mall.model.*;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -27,13 +32,35 @@ public class CommonZoneService {
     private final YxxZoneSkilledProductMapper zoneSkilledProductMapper;
     private final CommonZoneDao commonZoneDao;
 
-    public YxxZone zoneInfo(Long zoneId) {
-        return zoneMapper.selectByPrimaryKey(zoneId);
+    public List<YxxZone> queryZoneList(Long regionId) {
+        return zoneMapper.selectByExample(new YxxZoneExample().createCriteria()
+                .when(regionId != null, criteria -> criteria.andRegionIdEqualTo(regionId))
+                .andEnableEqualTo(1).example());
+    }
+
+    public AppZoneInfo zoneInfo(YxxWorker worker) {
+        YxxZone zone = zoneMapper.selectByPrimaryKey(worker.getZoneId());
+        if (zone != null) {
+            AppZoneInfo zoneInfo = new AppZoneInfo();
+            BeanUtils.copyProperties(zone, zoneInfo);
+            if (zone.getManagerWorker() != null && zone.getManagerWorker().equals(worker.getId())) {
+                zoneInfo.setIsAdmin(1);
+            } else {
+                zoneInfo.setIsAdmin(0);
+            }
+        }
+        return null;
     }
 
     public List<ZoneWorkerInfo> zoneWorkerInfoList(Long zoneId, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         return commonZoneDao.queryWorkersByZoneId(zoneId);
+    }
+
+    public List<YxxZoneApply> queryZoneApplyList(Long workerId) {
+        return zoneApplyMapper.selectByExample(new YxxZoneApplyExample().createCriteria()
+                .when(workerId != null, criteria -> criteria.andWorkerIdEqualTo(workerId))
+                .example().orderBy(YxxZoneApply.Column.applyTime.desc()));
     }
 
     /**
@@ -49,6 +76,7 @@ public class CommonZoneService {
         zoneApply.setRegionId(worker.getRegionId());
         zoneApply.setRegionName(worker.getRegion());
         zoneApply.setWorkerName(worker.getRealName());
+        zoneApply.setWorkerId(worker.getId());
         return zoneApplyMapper.insertSelective(zoneApply);
     }
 
@@ -91,4 +119,7 @@ public class CommonZoneService {
         }
     }
 
+    public List<ZoneSkilledProductInfo> querySkilledProInfoList(Long zoneId) {
+        return commonZoneDao.querySkilledProInfoList(zoneId);
+    }
 }

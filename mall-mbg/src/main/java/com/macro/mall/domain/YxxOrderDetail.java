@@ -1,5 +1,6 @@
 package com.macro.mall.domain;
 
+import com.macro.mall.model.PmsProduct;
 import com.macro.mall.model.YxxMember;
 import com.macro.mall.model.YxxRepairRecord;
 import com.macro.mall.model.YxxWorker;
@@ -41,5 +42,8 @@ public class YxxOrderDetail {
 
     @ApiModelProperty("用户信息")
     private YxxMember member;
+
+    @ApiModelProperty("服务品类信息")
+    private PmsProduct product;
 
 }

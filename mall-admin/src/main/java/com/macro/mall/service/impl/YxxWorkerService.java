@@ -92,5 +92,16 @@ public class YxxWorkerService {
         return workers.stream().sorted().map(YxxWorker::getId).collect(Collectors.toList());
     }
 
+    /**
+     * 重置 过期会员的会员等级
+     *
+     * @return 更新数量
+     */
+    public int resetWorkerLevel() {
+        return yxxWorkerMapper.updateByExampleSelective(
+                YxxWorker.builder().levelId(1).updateTime(new Date()).build(),
+                new YxxWorkerExample().createCriteria().andLevelIdGreaterThan(1).andLevelExpireDateLessThan(new Date()).example(),
+                YxxWorker.Column.updateTime, YxxWorker.Column.levelId);
+    }
 
 }

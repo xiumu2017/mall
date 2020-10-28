@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,8 +31,14 @@ public class YxxZoneWorker implements Serializable {
     @ApiModelProperty(value="区域ID")
     private Long zoneId;
 
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value="是否是管理员：1是0否")
     private Integer isAdmin;
+
+    @ApiModelProperty(value="加入时间")
+    private Date createTime;
+
+    @ApiModelProperty(value="更新时间")
+    private Date updateTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -39,7 +46,9 @@ public class YxxZoneWorker implements Serializable {
         id("id", "id", "BIGINT", false),
         workerId("worker_id", "workerId", "BIGINT", false),
         zoneId("zone_id", "zoneId", "BIGINT", false),
-        isAdmin("is_admin", "isAdmin", "INTEGER", false);
+        isAdmin("is_admin", "isAdmin", "INTEGER", false),
+        createTime("create_time", "createTime", "TIMESTAMP", false),
+        updateTime("update_time", "updateTime", "TIMESTAMP", false);
 
         private static final String BEGINNING_DELIMITER = "`";
 

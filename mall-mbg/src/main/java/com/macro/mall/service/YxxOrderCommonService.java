@@ -39,6 +39,7 @@ public class YxxOrderCommonService {
     private final YxxOrderMapper orderMapper;
     private final YxxWorkerLevelMapper workerLevelMapper;
     private final YxxWorkerOrderCountMapper workerOrderCountMapper;
+    private final PmsProductMapper productMapper;
 
     private YxxWorkerOrderCount countByWorkerId(Long workerId) {
         return workerOrderCountMapper.selectByPrimaryKey(workerId);
@@ -90,6 +91,9 @@ public class YxxOrderCommonService {
         detail.setOrderStatusRecordList(recordInfoList);
         detail.setMember(memberMapper.selectByPrimaryKey(orderInfo.getMemberId()));
         detail.setWorker(workerMapper.selectByPrimaryKey(orderInfo.getWorkerId()));
+        PmsProduct product = productMapper.selectByPrimaryKeySelective(orderInfo.getProductId(),
+                PmsProduct.Column.excludes(PmsProduct.Column.detailHtml));
+        detail.setProduct(product);
         return detail;
     }
 

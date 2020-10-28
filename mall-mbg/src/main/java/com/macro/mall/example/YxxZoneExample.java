@@ -885,6 +885,406 @@ public class YxxZoneExample {
             return (Criteria) this;
         }
 
+        public Criteria andAddressIsNull() {
+            addCriterion("address is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressIsNotNull() {
+            addCriterion("address is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressEqualTo(String value) {
+            addCriterion("address =", value, "address");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("address = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressNotEqualTo(String value) {
+            addCriterion("address <>", value, "address");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressNotEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("address <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressGreaterThan(String value) {
+            addCriterion("address >", value, "address");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressGreaterThanColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("address > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressGreaterThanOrEqualTo(String value) {
+            addCriterion("address >=", value, "address");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressGreaterThanOrEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("address >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressLessThan(String value) {
+            addCriterion("address <", value, "address");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressLessThanColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("address < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressLessThanOrEqualTo(String value) {
+            addCriterion("address <=", value, "address");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressLessThanOrEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("address <= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressLike(String value) {
+            addCriterion("address like", value, "address");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressNotLike(String value) {
+            addCriterion("address not like", value, "address");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressIn(List<String> values) {
+            addCriterion("address in", values, "address");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressNotIn(List<String> values) {
+            addCriterion("address not in", values, "address");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressBetween(String value1, String value2) {
+            addCriterion("address between", value1, value2, "address");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressNotBetween(String value1, String value2) {
+            addCriterion("address not between", value1, value2, "address");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractIsNull() {
+            addCriterion("contract is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractIsNotNull() {
+            addCriterion("contract is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractEqualTo(String value) {
+            addCriterion("contract =", value, "contract");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("contract = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andContractNotEqualTo(String value) {
+            addCriterion("contract <>", value, "contract");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractNotEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("contract <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andContractGreaterThan(String value) {
+            addCriterion("contract >", value, "contract");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractGreaterThanColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("contract > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andContractGreaterThanOrEqualTo(String value) {
+            addCriterion("contract >=", value, "contract");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractGreaterThanOrEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("contract >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andContractLessThan(String value) {
+            addCriterion("contract <", value, "contract");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractLessThanColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("contract < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andContractLessThanOrEqualTo(String value) {
+            addCriterion("contract <=", value, "contract");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractLessThanOrEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("contract <= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andContractLike(String value) {
+            addCriterion("contract like", value, "contract");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractNotLike(String value) {
+            addCriterion("contract not like", value, "contract");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractIn(List<String> values) {
+            addCriterion("contract in", values, "contract");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractNotIn(List<String> values) {
+            addCriterion("contract not in", values, "contract");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractBetween(String value1, String value2) {
+            addCriterion("contract between", value1, value2, "contract");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractNotBetween(String value1, String value2) {
+            addCriterion("contract not between", value1, value2, "contract");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicIsNull() {
+            addCriterion("pic is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicIsNotNull() {
+            addCriterion("pic is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicEqualTo(String value) {
+            addCriterion("pic =", value, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("pic = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andPicNotEqualTo(String value) {
+            addCriterion("pic <>", value, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicNotEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("pic <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andPicGreaterThan(String value) {
+            addCriterion("pic >", value, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicGreaterThanColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("pic > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andPicGreaterThanOrEqualTo(String value) {
+            addCriterion("pic >=", value, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicGreaterThanOrEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("pic >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andPicLessThan(String value) {
+            addCriterion("pic <", value, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicLessThanColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("pic < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andPicLessThanOrEqualTo(String value) {
+            addCriterion("pic <=", value, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicLessThanOrEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("pic <= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andPicLike(String value) {
+            addCriterion("pic like", value, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicNotLike(String value) {
+            addCriterion("pic not like", value, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicIn(List<String> values) {
+            addCriterion("pic in", values, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicNotIn(List<String> values) {
+            addCriterion("pic not in", values, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicBetween(String value1, String value2) {
+            addCriterion("pic between", value1, value2, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicNotBetween(String value1, String value2) {
+            addCriterion("pic not between", value1, value2, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionIsNull() {
+            addCriterion("description is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionIsNotNull() {
+            addCriterion("description is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionEqualTo(String value) {
+            addCriterion("description =", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("description = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotEqualTo(String value) {
+            addCriterion("description <>", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("description <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionGreaterThan(String value) {
+            addCriterion("description >", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionGreaterThanColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("description > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionGreaterThanOrEqualTo(String value) {
+            addCriterion("description >=", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionGreaterThanOrEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("description >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLessThan(String value) {
+            addCriterion("description <", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLessThanColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("description < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLessThanOrEqualTo(String value) {
+            addCriterion("description <=", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLessThanOrEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("description <= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLike(String value) {
+            addCriterion("description like", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotLike(String value) {
+            addCriterion("description not like", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionIn(List<String> values) {
+            addCriterion("description in", values, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotIn(List<String> values) {
+            addCriterion("description not in", values, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionBetween(String value1, String value2) {
+            addCriterion("description between", value1, value2, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotBetween(String value1, String value2) {
+            addCriterion("description not between", value1, value2, "description");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
@@ -972,6 +1372,276 @@ public class YxxZoneExample {
 
         public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
             addCriterion("create_time not between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIsNull() {
+            addCriterion("update_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIsNotNull() {
+            addCriterion("update_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeEqualTo(Date value) {
+            addCriterion("update_time =", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("update_time = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotEqualTo(Date value) {
+            addCriterion("update_time <>", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("update_time <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeGreaterThan(Date value) {
+            addCriterion("update_time >", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeGreaterThanColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("update_time > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("update_time >=", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeGreaterThanOrEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("update_time >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeLessThan(Date value) {
+            addCriterion("update_time <", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeLessThanColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("update_time < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("update_time <=", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeLessThanOrEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("update_time <= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIn(List<Date> values) {
+            addCriterion("update_time in", values, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotIn(List<Date> values) {
+            addCriterion("update_time not in", values, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeBetween(Date value1, Date value2) {
+            addCriterion("update_time between", value1, value2, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("update_time not between", value1, value2, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andApplyWorkerIsNull() {
+            addCriterion("apply_worker is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andApplyWorkerIsNotNull() {
+            addCriterion("apply_worker is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andApplyWorkerEqualTo(Long value) {
+            addCriterion("apply_worker =", value, "applyWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andApplyWorkerEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("apply_worker = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andApplyWorkerNotEqualTo(Long value) {
+            addCriterion("apply_worker <>", value, "applyWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andApplyWorkerNotEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("apply_worker <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andApplyWorkerGreaterThan(Long value) {
+            addCriterion("apply_worker >", value, "applyWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andApplyWorkerGreaterThanColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("apply_worker > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andApplyWorkerGreaterThanOrEqualTo(Long value) {
+            addCriterion("apply_worker >=", value, "applyWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andApplyWorkerGreaterThanOrEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("apply_worker >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andApplyWorkerLessThan(Long value) {
+            addCriterion("apply_worker <", value, "applyWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andApplyWorkerLessThanColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("apply_worker < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andApplyWorkerLessThanOrEqualTo(Long value) {
+            addCriterion("apply_worker <=", value, "applyWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andApplyWorkerLessThanOrEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("apply_worker <= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andApplyWorkerIn(List<Long> values) {
+            addCriterion("apply_worker in", values, "applyWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andApplyWorkerNotIn(List<Long> values) {
+            addCriterion("apply_worker not in", values, "applyWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andApplyWorkerBetween(Long value1, Long value2) {
+            addCriterion("apply_worker between", value1, value2, "applyWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andApplyWorkerNotBetween(Long value1, Long value2) {
+            addCriterion("apply_worker not between", value1, value2, "applyWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerWorkerIsNull() {
+            addCriterion("manager_worker is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerWorkerIsNotNull() {
+            addCriterion("manager_worker is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerWorkerEqualTo(Long value) {
+            addCriterion("manager_worker =", value, "managerWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerWorkerEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("manager_worker = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerWorkerNotEqualTo(Long value) {
+            addCriterion("manager_worker <>", value, "managerWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerWorkerNotEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("manager_worker <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerWorkerGreaterThan(Long value) {
+            addCriterion("manager_worker >", value, "managerWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerWorkerGreaterThanColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("manager_worker > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerWorkerGreaterThanOrEqualTo(Long value) {
+            addCriterion("manager_worker >=", value, "managerWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerWorkerGreaterThanOrEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("manager_worker >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerWorkerLessThan(Long value) {
+            addCriterion("manager_worker <", value, "managerWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerWorkerLessThanColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("manager_worker < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerWorkerLessThanOrEqualTo(Long value) {
+            addCriterion("manager_worker <=", value, "managerWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerWorkerLessThanOrEqualToColumn(YxxZone.Column column) {
+            addCriterion(new StringBuilder("manager_worker <= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerWorkerIn(List<Long> values) {
+            addCriterion("manager_worker in", values, "managerWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerWorkerNotIn(List<Long> values) {
+            addCriterion("manager_worker not in", values, "managerWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerWorkerBetween(Long value1, Long value2) {
+            addCriterion("manager_worker between", value1, value2, "managerWorker");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerWorkerNotBetween(Long value1, Long value2) {
+            addCriterion("manager_worker not between", value1, value2, "managerWorker");
             return (Criteria) this;
         }
     }

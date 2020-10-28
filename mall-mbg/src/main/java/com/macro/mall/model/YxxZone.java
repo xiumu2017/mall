@@ -47,8 +47,29 @@ public class YxxZone implements Serializable {
     @ApiModelProperty(value="中心抽成比例")
     private BigDecimal cutPercent;
 
+    @ApiModelProperty(value="服务中心所在地址")
+    private String address;
+
+    @ApiModelProperty(value="联系方式")
+    private String contract;
+
+    @ApiModelProperty(value="图片介绍")
+    private String pic;
+
+    @ApiModelProperty(value="介绍信息")
+    private String description;
+
     @ApiModelProperty(value="创建时间")
     private Date createTime;
+
+    @ApiModelProperty(value="更新时间")
+    private Date updateTime;
+
+    @ApiModelProperty(value="申请维修工ID")
+    private Long applyWorker;
+
+    @ApiModelProperty(value="管理维修工ID")
+    private Long managerWorker;
 
     private static final long serialVersionUID = 1L;
 
@@ -61,7 +82,14 @@ public class YxxZone implements Serializable {
         regionId("region_id", "regionId", "BIGINT", false),
         isManual("is_manual", "isManual", "INTEGER", false),
         cutPercent("cut_percent", "cutPercent", "DECIMAL", false),
-        createTime("create_time", "createTime", "TIMESTAMP", false);
+        address("address", "address", "VARCHAR", false),
+        contract("contract", "contract", "VARCHAR", false),
+        pic("pic", "pic", "VARCHAR", false),
+        description("description", "description", "VARCHAR", false),
+        createTime("create_time", "createTime", "TIMESTAMP", false),
+        updateTime("update_time", "updateTime", "TIMESTAMP", false),
+        applyWorker("apply_worker", "applyWorker", "BIGINT", false),
+        managerWorker("manager_worker", "managerWorker", "BIGINT", false);
 
         private static final String BEGINNING_DELIMITER = "`";
 
