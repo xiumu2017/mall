@@ -34,7 +34,7 @@ public class WorkerDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return yxxWorker.getUsername();
+        return yxxWorker.getPhone();
     }
 
     @Override

@@ -1055,6 +1055,96 @@ public class YxxWorkerLevelExample {
             return (Criteria) this;
         }
 
+        public Criteria andOrderRushAmountBargainIsNull() {
+            addCriterion("order_rush_amount_bargain is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderRushAmountBargainIsNotNull() {
+            addCriterion("order_rush_amount_bargain is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderRushAmountBargainEqualTo(Integer value) {
+            addCriterion("order_rush_amount_bargain =", value, "orderRushAmountBargain");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderRushAmountBargainEqualToColumn(YxxWorkerLevel.Column column) {
+            addCriterion(new StringBuilder("order_rush_amount_bargain = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderRushAmountBargainNotEqualTo(Integer value) {
+            addCriterion("order_rush_amount_bargain <>", value, "orderRushAmountBargain");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderRushAmountBargainNotEqualToColumn(YxxWorkerLevel.Column column) {
+            addCriterion(new StringBuilder("order_rush_amount_bargain <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderRushAmountBargainGreaterThan(Integer value) {
+            addCriterion("order_rush_amount_bargain >", value, "orderRushAmountBargain");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderRushAmountBargainGreaterThanColumn(YxxWorkerLevel.Column column) {
+            addCriterion(new StringBuilder("order_rush_amount_bargain > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderRushAmountBargainGreaterThanOrEqualTo(Integer value) {
+            addCriterion("order_rush_amount_bargain >=", value, "orderRushAmountBargain");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderRushAmountBargainGreaterThanOrEqualToColumn(YxxWorkerLevel.Column column) {
+            addCriterion(new StringBuilder("order_rush_amount_bargain >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderRushAmountBargainLessThan(Integer value) {
+            addCriterion("order_rush_amount_bargain <", value, "orderRushAmountBargain");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderRushAmountBargainLessThanColumn(YxxWorkerLevel.Column column) {
+            addCriterion(new StringBuilder("order_rush_amount_bargain < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderRushAmountBargainLessThanOrEqualTo(Integer value) {
+            addCriterion("order_rush_amount_bargain <=", value, "orderRushAmountBargain");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderRushAmountBargainLessThanOrEqualToColumn(YxxWorkerLevel.Column column) {
+            addCriterion(new StringBuilder("order_rush_amount_bargain <= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderRushAmountBargainIn(List<Integer> values) {
+            addCriterion("order_rush_amount_bargain in", values, "orderRushAmountBargain");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderRushAmountBargainNotIn(List<Integer> values) {
+            addCriterion("order_rush_amount_bargain not in", values, "orderRushAmountBargain");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderRushAmountBargainBetween(Integer value1, Integer value2) {
+            addCriterion("order_rush_amount_bargain between", value1, value2, "orderRushAmountBargain");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderRushAmountBargainNotBetween(Integer value1, Integer value2) {
+            addCriterion("order_rush_amount_bargain not between", value1, value2, "orderRushAmountBargain");
+            return (Criteria) this;
+        }
+
         public Criteria andCutDiscountIsNull() {
             addCriterion("cut_discount is null");
             return (Criteria) this;

@@ -70,6 +70,8 @@ public class PmsPortalProductServiceImpl implements PmsPortalProductService {
                     new YxxHomeCostExample().createCriteria().andIdIn(ids).example()
             );
             appProductInfo.setCommonCostList(costList);
+        } else {
+            appProductInfo.setCommonCostList(new ArrayList<>());
         }
         return appProductInfo;
     }

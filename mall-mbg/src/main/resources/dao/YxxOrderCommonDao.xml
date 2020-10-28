@@ -202,4 +202,9 @@
         set rush_amount = rush_amount + 1
         where worker_id = #{workerId,jdbcType=BIGINT}
     </update>
+    <update id="updateWorkerOrderRushBargainCount">
+        update yxx_worker_order_count
+        set rush_amount_bargain = rush_amount_bargain + 1
+        where worker_id = #{workerId,jdbcType=BIGINT}
+    </update>
 </mapper>

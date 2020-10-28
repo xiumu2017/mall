@@ -502,6 +502,96 @@ public class YxxWorkerOrderCountExample {
             addCriterion("rush_amount not between", value1, value2, "rushAmount");
             return (Criteria) this;
         }
+
+        public Criteria andRushAmountBargainIsNull() {
+            addCriterion("rush_amount_bargain is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRushAmountBargainIsNotNull() {
+            addCriterion("rush_amount_bargain is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRushAmountBargainEqualTo(Integer value) {
+            addCriterion("rush_amount_bargain =", value, "rushAmountBargain");
+            return (Criteria) this;
+        }
+
+        public Criteria andRushAmountBargainEqualToColumn(YxxWorkerOrderCount.Column column) {
+            addCriterion(new StringBuilder("rush_amount_bargain = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andRushAmountBargainNotEqualTo(Integer value) {
+            addCriterion("rush_amount_bargain <>", value, "rushAmountBargain");
+            return (Criteria) this;
+        }
+
+        public Criteria andRushAmountBargainNotEqualToColumn(YxxWorkerOrderCount.Column column) {
+            addCriterion(new StringBuilder("rush_amount_bargain <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andRushAmountBargainGreaterThan(Integer value) {
+            addCriterion("rush_amount_bargain >", value, "rushAmountBargain");
+            return (Criteria) this;
+        }
+
+        public Criteria andRushAmountBargainGreaterThanColumn(YxxWorkerOrderCount.Column column) {
+            addCriterion(new StringBuilder("rush_amount_bargain > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andRushAmountBargainGreaterThanOrEqualTo(Integer value) {
+            addCriterion("rush_amount_bargain >=", value, "rushAmountBargain");
+            return (Criteria) this;
+        }
+
+        public Criteria andRushAmountBargainGreaterThanOrEqualToColumn(YxxWorkerOrderCount.Column column) {
+            addCriterion(new StringBuilder("rush_amount_bargain >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andRushAmountBargainLessThan(Integer value) {
+            addCriterion("rush_amount_bargain <", value, "rushAmountBargain");
+            return (Criteria) this;
+        }
+
+        public Criteria andRushAmountBargainLessThanColumn(YxxWorkerOrderCount.Column column) {
+            addCriterion(new StringBuilder("rush_amount_bargain < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andRushAmountBargainLessThanOrEqualTo(Integer value) {
+            addCriterion("rush_amount_bargain <=", value, "rushAmountBargain");
+            return (Criteria) this;
+        }
+
+        public Criteria andRushAmountBargainLessThanOrEqualToColumn(YxxWorkerOrderCount.Column column) {
+            addCriterion(new StringBuilder("rush_amount_bargain <= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andRushAmountBargainIn(List<Integer> values) {
+            addCriterion("rush_amount_bargain in", values, "rushAmountBargain");
+            return (Criteria) this;
+        }
+
+        public Criteria andRushAmountBargainNotIn(List<Integer> values) {
+            addCriterion("rush_amount_bargain not in", values, "rushAmountBargain");
+            return (Criteria) this;
+        }
+
+        public Criteria andRushAmountBargainBetween(Integer value1, Integer value2) {
+            addCriterion("rush_amount_bargain between", value1, value2, "rushAmountBargain");
+            return (Criteria) this;
+        }
+
+        public Criteria andRushAmountBargainNotBetween(Integer value1, Integer value2) {
+            addCriterion("rush_amount_bargain not between", value1, value2, "rushAmountBargain");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

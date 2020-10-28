@@ -30,8 +30,11 @@ public class YxxWorkerOrderCount implements Serializable {
     @ApiModelProperty(value="系统分派数量")
     private Integer distributeAmount;
 
-    @ApiModelProperty(value="抢单数量")
+    @ApiModelProperty(value="抢单数量-一口价")
     private Integer rushAmount;
+
+    @ApiModelProperty(value="抢单数量-询价")
+    private Integer rushAmountBargain;
 
     private static final long serialVersionUID = 1L;
 
@@ -39,7 +42,8 @@ public class YxxWorkerOrderCount implements Serializable {
         workerId("worker_id", "workerId", "BIGINT", false),
         assignAmount("assign_amount", "assignAmount", "INTEGER", false),
         distributeAmount("distribute_amount", "distributeAmount", "INTEGER", false),
-        rushAmount("rush_amount", "rushAmount", "INTEGER", false);
+        rushAmount("rush_amount", "rushAmount", "INTEGER", false),
+        rushAmountBargain("rush_amount_bargain", "rushAmountBargain", "INTEGER", false);
 
         private static final String BEGINNING_DELIMITER = "`";
 

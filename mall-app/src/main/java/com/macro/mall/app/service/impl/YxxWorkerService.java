@@ -162,15 +162,7 @@ public class YxxWorkerService {
         return workerMapper.updateByPrimaryKeySelective(member);
     }
 
-    public UserDetails loadUserByUsername(String username) {
-        YxxWorker member = getByUsername(username);
-        if (member != null) {
-            return new WorkerDetails(member);
-        }
-        throw new UsernameNotFoundException("用户名或密码错误");
-    }
-
-    private UserDetails loadUserByPhone(String phone) {
+    public UserDetails loadUserByPhone(String phone) {
         YxxWorker member = getByPhone(phone);
         if (member != null) {
             return new WorkerDetails(member);

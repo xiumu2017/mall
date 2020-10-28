@@ -12,6 +12,7 @@ import com.macro.mall.domain.YxxOrderStatusRecordInfo;
 import com.macro.mall.enums.OrderStatusUtil;
 import com.macro.mall.example.YxxOrderStatusRecordExample;
 import com.macro.mall.example.YxxRepairRecordExample;
+import com.macro.mall.example.YxxWorkerLevelExample;
 import com.macro.mall.mapper.*;
 import com.macro.mall.model.*;
 import lombok.AllArgsConstructor;
@@ -41,17 +42,22 @@ public class YxxOrderCommonService {
     private final YxxWorkerOrderCountMapper workerOrderCountMapper;
     private final PmsProductMapper productMapper;
 
-    private YxxWorkerOrderCount countByWorkerId(Long workerId) {
+    public YxxWorkerOrderCount countByWorkerId(Long workerId) {
         YxxWorkerOrderCount count = workerOrderCountMapper.selectByPrimaryKey(workerId);
         if (count == null) {
-            count = YxxWorkerOrderCount.builder().assignAmount(0).distributeAmount(0).rushAmount(0).workerId(workerId).build();
+            count = YxxWorkerOrderCount.builder().assignAmount(0).distributeAmount(0).rushAmount(0)
+                    .rushAmountBargain(0).workerId(workerId).build();
             workerOrderCountMapper.insert(count);
         }
         return count;
     }
 
-    private YxxWorkerLevel getLevel(Integer levelId) {
+    public YxxWorkerLevel getLevel(Integer levelId) {
         return workerLevelMapper.selectByPrimaryKey(levelId);
+    }
+
+    public List<YxxWorkerLevel> getLevelList() {
+        return workerLevelMapper.selectByExample(new YxxWorkerLevelExample().createCriteria().andEnableEqualTo(1).example());
     }
 
     public boolean check(YxxOrder order, Long workerId) {
@@ -67,7 +73,12 @@ public class YxxOrderCommonService {
             return workerLevel.getOrderDistributeAmount() >= count.getDistributeAmount() + 1;
         }
         if (order.getOrderType() == OrderType.SYSTEM_RUSH.val()) {
-            return workerLevel.getOrderRushAmount() >= count.getRushAmount() + 1;
+            // 询价单
+            if (order.getIsBargain() == 1) {
+                return workerLevel.getOrderRushAmountBargain() >= count.getRushAmount() + 1;
+            } else {
+                return workerLevel.getOrderRushAmount() >= count.getRushAmount() + 1;
+            }
         }
         if (order.getOrderType() == OrderType.MANUAL_DISTRIBUTE.val()) {
             return workerLevel.getOrderAssignAmount() >= count.getAssignAmount() + 1;
@@ -82,6 +93,10 @@ public class YxxOrderCommonService {
             return orderCommonDao.updateWorkerOrderDistributeCount(workerId);
         }
         if (order.getOrderType() == OrderType.SYSTEM_RUSH.val()) {
+            // 询价单
+            if (order.getIsBargain() == 1) {
+                return orderCommonDao.updateWorkerOrderRushBargainCount(workerId);
+            }
             return orderCommonDao.updateWorkerOrderRushCount(workerId);
         }
         if (order.getOrderType() == OrderType.MANUAL_DISTRIBUTE.val()) {

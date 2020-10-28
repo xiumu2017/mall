@@ -84,6 +84,14 @@ public interface YxxOrderCommonDao {
     int updateWorkerOrderRushCount(Long workerId);
 
     /**
+     * 更新抢单询价数量 + 1
+     *
+     * @param workerId 维修工ID
+     * @return res
+     */
+    int updateWorkerOrderRushBargainCount(Long workerId);
+
+    /**
      * 更新系统分派订单数量 +1
      *
      * @param workerId 维修工ID

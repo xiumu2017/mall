@@ -12,6 +12,7 @@
     <result column="order_assign_amount" jdbcType="INTEGER" property="orderAssignAmount" />
     <result column="order_distribute_amount" jdbcType="INTEGER" property="orderDistributeAmount" />
     <result column="order_rush_amount" jdbcType="INTEGER" property="orderRushAmount" />
+    <result column="order_rush_amount_bargain" jdbcType="INTEGER" property="orderRushAmountBargain" />
     <result column="cut_discount" jdbcType="DECIMAL" property="cutDiscount" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -79,8 +80,8 @@
   </sql>
   <sql id="Base_Column_List">
     id, `name`, `enable`, price_month, price_monthly, price_year, deleted, order_assign_amount, 
-    order_distribute_amount, order_rush_amount, cut_discount, remark, create_time, update_time, 
-    create_by, update_by
+    order_distribute_amount, order_rush_amount, order_rush_amount_bargain, cut_discount, 
+    remark, create_time, update_time, create_by, update_by
   </sql>
   <select id="selectByExample" parameterType="com.macro.mall.example.YxxWorkerLevelExample" resultMap="BaseResultMap">
     select
@@ -157,15 +158,17 @@
     insert into yxx_worker_level (`name`, `enable`, price_month, 
       price_monthly, price_year, deleted, 
       order_assign_amount, order_distribute_amount, 
-      order_rush_amount, cut_discount, remark, 
-      create_time, update_time, create_by, 
-      update_by)
+      order_rush_amount, order_rush_amount_bargain, 
+      cut_discount, remark, create_time, 
+      update_time, create_by, update_by
+      )
     values (#{name,jdbcType=VARCHAR}, #{enable,jdbcType=INTEGER}, #{priceMonth,jdbcType=DECIMAL}, 
       #{priceMonthly,jdbcType=DECIMAL}, #{priceYear,jdbcType=DECIMAL}, #{deleted,jdbcType=INTEGER}, 
       #{orderAssignAmount,jdbcType=INTEGER}, #{orderDistributeAmount,jdbcType=INTEGER}, 
-      #{orderRushAmount,jdbcType=INTEGER}, #{cutDiscount,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, 
-      #{updateBy,jdbcType=BIGINT})
+      #{orderRushAmount,jdbcType=INTEGER}, #{orderRushAmountBargain,jdbcType=INTEGER}, 
+      #{cutDiscount,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="map">
     <selectKey keyProperty="record.id" order="AFTER" resultType="java.lang.Integer">
@@ -206,6 +209,9 @@
           </if>
           <if test="record.orderRushAmount != null">
             order_rush_amount,
+          </if>
+          <if test="record.orderRushAmountBargain != null">
+            order_rush_amount_bargain,
           </if>
           <if test="record.cutDiscount != null">
             cut_discount,
@@ -264,6 +270,9 @@
           </if>
           <if test="record.orderRushAmount != null">
             #{record.orderRushAmount,jdbcType=INTEGER},
+          </if>
+          <if test="record.orderRushAmountBargain != null">
+            #{record.orderRushAmountBargain,jdbcType=INTEGER},
           </if>
           <if test="record.cutDiscount != null">
             #{record.cutDiscount,jdbcType=DECIMAL},
@@ -334,6 +343,9 @@
           <if test="record.orderRushAmount != null">
             order_rush_amount = #{record.orderRushAmount,jdbcType=INTEGER},
           </if>
+          <if test="record.orderRushAmountBargain != null">
+            order_rush_amount_bargain = #{record.orderRushAmountBargain,jdbcType=INTEGER},
+          </if>
           <if test="record.cutDiscount != null">
             cut_discount = #{record.cutDiscount,jdbcType=DECIMAL},
           </if>
@@ -371,6 +383,7 @@
       order_assign_amount = #{record.orderAssignAmount,jdbcType=INTEGER},
       order_distribute_amount = #{record.orderDistributeAmount,jdbcType=INTEGER},
       order_rush_amount = #{record.orderRushAmount,jdbcType=INTEGER},
+      order_rush_amount_bargain = #{record.orderRushAmountBargain,jdbcType=INTEGER},
       cut_discount = #{record.cutDiscount,jdbcType=DECIMAL},
       remark = #{record.remark,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -419,6 +432,9 @@
           <if test="record.orderRushAmount != null">
             order_rush_amount = #{record.orderRushAmount,jdbcType=INTEGER},
           </if>
+          <if test="record.orderRushAmountBargain != null">
+            order_rush_amount_bargain = #{record.orderRushAmountBargain,jdbcType=INTEGER},
+          </if>
           <if test="record.cutDiscount != null">
             cut_discount = #{record.cutDiscount,jdbcType=DECIMAL},
           </if>
@@ -453,6 +469,7 @@
       order_assign_amount = #{orderAssignAmount,jdbcType=INTEGER},
       order_distribute_amount = #{orderDistributeAmount,jdbcType=INTEGER},
       order_rush_amount = #{orderRushAmount,jdbcType=INTEGER},
+      order_rush_amount_bargain = #{orderRushAmountBargain,jdbcType=INTEGER},
       cut_discount = #{cutDiscount,jdbcType=DECIMAL},
       remark = #{remark,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -497,16 +514,17 @@
   <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
     insert into yxx_worker_level
     (`name`, `enable`, price_month, price_monthly, price_year, deleted, order_assign_amount, 
-      order_distribute_amount, order_rush_amount, cut_discount, remark, create_time, 
-      update_time, create_by, update_by)
+      order_distribute_amount, order_rush_amount, order_rush_amount_bargain, cut_discount, 
+      remark, create_time, update_time, create_by, update_by)
     values
     <foreach collection="list" item="item" separator=",">
       (#{item.name,jdbcType=VARCHAR}, #{item.enable,jdbcType=INTEGER}, #{item.priceMonth,jdbcType=DECIMAL}, 
         #{item.priceMonthly,jdbcType=DECIMAL}, #{item.priceYear,jdbcType=DECIMAL}, #{item.deleted,jdbcType=INTEGER}, 
         #{item.orderAssignAmount,jdbcType=INTEGER}, #{item.orderDistributeAmount,jdbcType=INTEGER}, 
-        #{item.orderRushAmount,jdbcType=INTEGER}, #{item.cutDiscount,jdbcType=DECIMAL}, 
-        #{item.remark,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP}, 
-        #{item.createBy,jdbcType=BIGINT}, #{item.updateBy,jdbcType=BIGINT})
+        #{item.orderRushAmount,jdbcType=INTEGER}, #{item.orderRushAmountBargain,jdbcType=INTEGER}, 
+        #{item.cutDiscount,jdbcType=DECIMAL}, #{item.remark,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, 
+        #{item.updateTime,jdbcType=TIMESTAMP}, #{item.createBy,jdbcType=BIGINT}, #{item.updateBy,jdbcType=BIGINT}
+        )
     </foreach>
   </insert>
   <insert id="batchInsertSelective" keyColumn="id" keyProperty="list.id" parameterType="map" useGeneratedKeys="true">
@@ -545,6 +563,9 @@
         </if>
         <if test="'order_rush_amount'.toString() == column.value">
           #{item.orderRushAmount,jdbcType=INTEGER}
+        </if>
+        <if test="'order_rush_amount_bargain'.toString() == column.value">
+          #{item.orderRushAmountBargain,jdbcType=INTEGER}
         </if>
         <if test="'cut_discount'.toString() == column.value">
           #{item.cutDiscount,jdbcType=DECIMAL}

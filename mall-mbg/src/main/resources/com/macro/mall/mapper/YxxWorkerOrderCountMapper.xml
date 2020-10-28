@@ -6,6 +6,7 @@
     <result column="assign_amount" jdbcType="INTEGER" property="assignAmount" />
     <result column="distribute_amount" jdbcType="INTEGER" property="distributeAmount" />
     <result column="rush_amount" jdbcType="INTEGER" property="rushAmount" />
+    <result column="rush_amount_bargain" jdbcType="INTEGER" property="rushAmountBargain" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    worker_id, assign_amount, distribute_amount, rush_amount
+    worker_id, assign_amount, distribute_amount, rush_amount, rush_amount_bargain
   </sql>
   <select id="selectByExample" parameterType="com.macro.mall.example.YxxWorkerOrderCountExample" resultMap="BaseResultMap">
     select
@@ -138,9 +139,9 @@
   </delete>
   <insert id="insert" parameterType="com.macro.mall.model.YxxWorkerOrderCount">
     insert into yxx_worker_order_count (worker_id, assign_amount, distribute_amount, 
-      rush_amount)
+      rush_amount, rush_amount_bargain)
     values (#{workerId,jdbcType=BIGINT}, #{assignAmount,jdbcType=INTEGER}, #{distributeAmount,jdbcType=INTEGER}, 
-      #{rushAmount,jdbcType=INTEGER})
+      #{rushAmount,jdbcType=INTEGER}, #{rushAmountBargain,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="map">
     insert into yxx_worker_order_count
@@ -163,6 +164,9 @@
           </if>
           <if test="record.rushAmount != null">
             rush_amount,
+          </if>
+          <if test="record.rushAmountBargain != null">
+            rush_amount_bargain,
           </if>
         </trim>
         <trim prefix="(" suffix=")" suffixOverrides="," />
@@ -188,6 +192,9 @@
           </if>
           <if test="record.rushAmount != null">
             #{record.rushAmount,jdbcType=INTEGER},
+          </if>
+          <if test="record.rushAmountBargain != null">
+            #{record.rushAmountBargain,jdbcType=INTEGER},
           </if>
         </trim>
       </otherwise>
@@ -222,6 +229,9 @@
           <if test="record.rushAmount != null">
             rush_amount = #{record.rushAmount,jdbcType=INTEGER},
           </if>
+          <if test="record.rushAmountBargain != null">
+            rush_amount_bargain = #{record.rushAmountBargain,jdbcType=INTEGER},
+          </if>
         </trim>
       </otherwise>
     </choose>
@@ -234,7 +244,8 @@
     set worker_id = #{record.workerId,jdbcType=BIGINT},
       assign_amount = #{record.assignAmount,jdbcType=INTEGER},
       distribute_amount = #{record.distributeAmount,jdbcType=INTEGER},
-      rush_amount = #{record.rushAmount,jdbcType=INTEGER}
+      rush_amount = #{record.rushAmount,jdbcType=INTEGER},
+      rush_amount_bargain = #{record.rushAmountBargain,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -259,6 +270,9 @@
           <if test="record.rushAmount != null">
             rush_amount = #{record.rushAmount,jdbcType=INTEGER},
           </if>
+          <if test="record.rushAmountBargain != null">
+            rush_amount_bargain = #{record.rushAmountBargain,jdbcType=INTEGER},
+          </if>
         </trim>
       </otherwise>
     </choose>
@@ -268,7 +282,8 @@
     update yxx_worker_order_count
     set assign_amount = #{assignAmount,jdbcType=INTEGER},
       distribute_amount = #{distributeAmount,jdbcType=INTEGER},
-      rush_amount = #{rushAmount,jdbcType=INTEGER}
+      rush_amount = #{rushAmount,jdbcType=INTEGER},
+      rush_amount_bargain = #{rushAmountBargain,jdbcType=INTEGER}
     where worker_id = #{workerId,jdbcType=BIGINT}
   </update>
   <select id="selectOneByExample" parameterType="com.macro.mall.example.YxxWorkerOrderCountExample" resultMap="BaseResultMap">
@@ -306,11 +321,12 @@
   </select>
   <insert id="batchInsert" parameterType="map">
     insert into yxx_worker_order_count
-    (worker_id, assign_amount, distribute_amount, rush_amount)
+    (worker_id, assign_amount, distribute_amount, rush_amount, rush_amount_bargain)
     values
     <foreach collection="list" item="item" separator=",">
       (#{item.workerId,jdbcType=BIGINT}, #{item.assignAmount,jdbcType=INTEGER}, #{item.distributeAmount,jdbcType=INTEGER}, 
-        #{item.rushAmount,jdbcType=INTEGER})
+        #{item.rushAmount,jdbcType=INTEGER}, #{item.rushAmountBargain,jdbcType=INTEGER}
+        )
     </foreach>
   </insert>
   <insert id="batchInsertSelective" parameterType="map">
@@ -334,6 +350,9 @@
         </if>
         <if test="'rush_amount'.toString() == column.value">
           #{item.rushAmount,jdbcType=INTEGER}
+        </if>
+        <if test="'rush_amount_bargain'.toString() == column.value">
+          #{item.rushAmountBargain,jdbcType=INTEGER}
         </if>
       </foreach>
       )

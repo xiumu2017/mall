@@ -13,11 +13,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 垚修修维修工会员等级表
+ * 
  *
  * @author Paradise
  */
-@ApiModel(value="垚修修维修工会员等级")
+@ApiModel(value="")
 @Data
 @Builder
 @AllArgsConstructor
@@ -50,8 +50,11 @@ public class YxxWorkerLevel implements Serializable {
     @ApiModelProperty(value="订单自动派单数量")
     private Integer orderDistributeAmount;
 
-    @ApiModelProperty(value="抢单数量")
+    @ApiModelProperty(value="抢单数量-一口价")
     private Integer orderRushAmount;
+
+    @ApiModelProperty(value="抢单数量-询价")
+    private Integer orderRushAmountBargain;
 
     @ApiModelProperty(value="抽成抵扣")
     private BigDecimal cutDiscount;
@@ -84,6 +87,7 @@ public class YxxWorkerLevel implements Serializable {
         orderAssignAmount("order_assign_amount", "orderAssignAmount", "INTEGER", false),
         orderDistributeAmount("order_distribute_amount", "orderDistributeAmount", "INTEGER", false),
         orderRushAmount("order_rush_amount", "orderRushAmount", "INTEGER", false),
+        orderRushAmountBargain("order_rush_amount_bargain", "orderRushAmountBargain", "INTEGER", false),
         cutDiscount("cut_discount", "cutDiscount", "DECIMAL", false),
         remark("remark", "remark", "VARCHAR", false),
         createTime("create_time", "createTime", "TIMESTAMP", false),
