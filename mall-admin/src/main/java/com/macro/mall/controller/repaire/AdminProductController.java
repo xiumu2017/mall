@@ -24,10 +24,10 @@ import java.util.Map;
 @RestController
 @Api(tags = "1.2 服务品类管理")
 @RequestMapping("/product")
-public class PmsProductController {
+public class AdminProductController {
     private final PmsProductService productService;
 
-    public PmsProductController(PmsProductService productService) {
+    public AdminProductController(PmsProductService productService) {
         this.productService = productService;
     }
 
@@ -76,19 +76,6 @@ public class PmsProductController {
         return CommonResult.success(productList);
     }
 
-    @ApiIgnore
-    @ApiOperation(value = "批量修改审核状态", hidden = true)
-    @RequestMapping(value = "/update/verifyStatus", method = RequestMethod.POST)
-    public CommonResult updateVerifyStatus(@RequestParam("ids") List<Long> ids,
-                                           @RequestParam("verifyStatus") Integer verifyStatus,
-                                           @RequestParam("detail") String detail) {
-        int count = productService.updateVerifyStatus(ids, verifyStatus, detail);
-        if (count > 0) {
-            return CommonResult.success(count);
-        } else {
-            return CommonResult.failed();
-        }
-    }
 
     @ApiIgnore
     @ApiOperation("批量上下架")
@@ -108,19 +95,6 @@ public class PmsProductController {
     public CommonResult updateRecommendStatus(@RequestParam("ids") List<Long> ids,
                                               @RequestParam("recommendStatus") Integer recommendStatus) {
         int count = productService.updateRecommendStatus(ids, recommendStatus);
-        if (count > 0) {
-            return CommonResult.success(count);
-        } else {
-            return CommonResult.failed();
-        }
-    }
-
-    @ApiIgnore
-    @ApiOperation(value = "批量设为新品", hidden = true)
-    @RequestMapping(value = "/update/newStatus", method = RequestMethod.POST)
-    public CommonResult updateNewStatus(@RequestParam("ids") List<Long> ids,
-                                        @RequestParam("newStatus") Integer newStatus) {
-        int count = productService.updateNewStatus(ids, newStatus);
         if (count > 0) {
             return CommonResult.success(count);
         } else {

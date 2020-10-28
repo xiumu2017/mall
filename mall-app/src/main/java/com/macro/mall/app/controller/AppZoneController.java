@@ -15,6 +15,7 @@ import com.macro.mall.model.YxxZone;
 import com.macro.mall.model.YxxZoneApply;
 import com.macro.mall.service.CommonZoneService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -109,6 +110,7 @@ public class AppZoneController {
     }
 
     @ApiOperation("管理员审批加入区域申请")
+    @ApiImplicitParam(name = "status", value = "审批结果：1通过2拒绝")
     @PostMapping("/apply/deal")
     public CommonResult dealApply(@RequestParam Integer status,
                                   @RequestParam Long applyId,

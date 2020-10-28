@@ -3,7 +3,6 @@ package com.macro.mall.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -13,11 +12,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 商品信息
+ * 
  *
  * @author Paradise
  */
-@ApiModel(value="商品信息")
+@ApiModel(value="")
 @Data
 @Builder
 @AllArgsConstructor
@@ -44,35 +43,17 @@ public class PmsProduct implements Serializable {
     @ApiModelProperty(value="上架状态：0->下架；1->上架")
     private Integer publishStatus;
 
-    @ApiModelProperty(value="新品状态:0->不是新品；1->新品")
-    private Integer newStatus;
-
     @ApiModelProperty(value="推荐状态；0->不推荐；1->推荐")
     private Integer recommendStatus;
 
-    @ApiModelProperty(value="审核状态：0->未审核；1->审核通过")
-    private Integer verifyStatus;
-
     @ApiModelProperty(value="排序")
     private Integer sort;
-
-    @ApiModelProperty(value="销量")
-    private Integer sale;
-
-    @ApiModelProperty(value="价格")
-    private BigDecimal price;
-
-    @ApiModelProperty(value="促销价格")
-    private BigDecimal promotionPrice;
 
     @ApiModelProperty(value="副标题")
     private String subTitle;
 
     @ApiModelProperty(value="搜索关键词")
     private String keywords;
-
-    @ApiModelProperty(value="画册图片，连产品图片限制为5张，以逗号分割")
-    private String albumPics;
 
     @ApiModelProperty(value="详情页标题")
     private String detailTitle;
@@ -98,8 +79,14 @@ public class PmsProduct implements Serializable {
     @ApiModelProperty(value="修改时间")
     private Date updateTime;
 
+    @ApiModelProperty(value="公共费用ID（多个逗号隔开）")
+    private String commonCost;
+
     @ApiModelProperty(value="商品描述")
     private String description;
+
+    @ApiModelProperty(value="画册图片，连产品图片限制为5张，以逗号分割")
+    private String albumPics;
 
     @ApiModelProperty(value="详情页文本描述")
     private String detailDesc;
@@ -120,16 +107,10 @@ public class PmsProduct implements Serializable {
         productSn("product_sn", "productSn", "VARCHAR", false),
         deleteStatus("delete_status", "deleteStatus", "INTEGER", false),
         publishStatus("publish_status", "publishStatus", "INTEGER", false),
-        newStatus("new_status", "newStatus", "INTEGER", false),
         recommendStatus("recommend_status", "recommendStatus", "INTEGER", false),
-        verifyStatus("verify_status", "verifyStatus", "INTEGER", false),
         sort("sort", "sort", "INTEGER", false),
-        sale("sale", "sale", "INTEGER", false),
-        price("price", "price", "DECIMAL", false),
-        promotionPrice("promotion_price", "promotionPrice", "DECIMAL", false),
         subTitle("sub_title", "subTitle", "VARCHAR", false),
         keywords("keywords", "keywords", "VARCHAR", false),
-        albumPics("album_pics", "albumPics", "VARCHAR", false),
         detailTitle("detail_title", "detailTitle", "VARCHAR", false),
         productCategoryName("product_category_name", "productCategoryName", "VARCHAR", false),
         regionId("region_id", "regionId", "BIGINT", false),
@@ -138,7 +119,9 @@ public class PmsProduct implements Serializable {
         chargeStandardId("charge_standard_id", "chargeStandardId", "BIGINT", false),
         createTime("create_time", "createTime", "TIMESTAMP", false),
         updateTime("update_time", "updateTime", "TIMESTAMP", false),
+        commonCost("common_cost", "commonCost", "VARCHAR", false),
         description("description", "description", "LONGVARCHAR", false),
+        albumPics("album_pics", "albumPics", "LONGVARCHAR", false),
         detailDesc("detail_desc", "detailDesc", "LONGVARCHAR", false),
         detailHtml("detail_html", "detailHtml", "LONGVARCHAR", false),
         chargeStandardJson("charge_standard_json", "chargeStandardJson", "LONGVARCHAR", false);

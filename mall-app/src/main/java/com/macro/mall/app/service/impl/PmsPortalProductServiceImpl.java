@@ -1,15 +1,21 @@
 package com.macro.mall.app.service.impl;
 
+import com.macro.mall.app.domain.AppProductInfo;
 import com.macro.mall.app.domain.PmsProductNode;
 import com.macro.mall.app.service.PmsPortalProductService;
 import com.macro.mall.example.PmsProductCategoryExample;
 import com.macro.mall.example.PmsProductExample;
+import com.macro.mall.example.YxxHomeCostExample;
 import com.macro.mall.mapper.PmsProductCategoryMapper;
 import com.macro.mall.mapper.PmsProductMapper;
+import com.macro.mall.mapper.YxxHomeCostMapper;
 import com.macro.mall.model.PmsProduct;
 import com.macro.mall.model.PmsProductCategory;
+import com.macro.mall.model.YxxHomeCost;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +31,7 @@ import java.util.List;
 public class PmsPortalProductServiceImpl implements PmsPortalProductService {
     private final PmsProductMapper productMapper;
     private final PmsProductCategoryMapper productCategoryMapper;
+    private final YxxHomeCostMapper homeCostMapper;
 
     @Override
     public List<PmsProductNode> categoryTreeList(Long regionId) {
@@ -49,10 +56,22 @@ public class PmsPortalProductServiceImpl implements PmsPortalProductService {
 
     @Override
     public PmsProduct productInfo(Long id) {
-
-        return productMapper.selectByPrimaryKeySelective(id, PmsProduct.Column.excludes(
-                PmsProduct.Column.detailHtml
-        ));
+        AppProductInfo appProductInfo = new AppProductInfo();
+        PmsProduct product = productMapper.selectByPrimaryKeySelective(id, PmsProduct.Column.excludes(PmsProduct.Column.detailHtml));
+        BeanUtils.copyProperties(product, appProductInfo);
+        String costs = product.getCommonCost();
+        if (!StringUtils.isEmpty(costs)) {
+            String[] arr = costs.split(",");
+            List<Long> ids = new ArrayList<>();
+            for (String s : arr) {
+                ids.add(Long.parseLong(s));
+            }
+            List<YxxHomeCost> costList = homeCostMapper.selectByExample(
+                    new YxxHomeCostExample().createCriteria().andIdIn(ids).example()
+            );
+            appProductInfo.setCommonCostList(costList);
+        }
+        return appProductInfo;
     }
 
     @Override

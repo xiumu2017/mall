@@ -9,16 +9,10 @@
     <result column="product_sn" jdbcType="VARCHAR" property="productSn" />
     <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
     <result column="publish_status" jdbcType="INTEGER" property="publishStatus" />
-    <result column="new_status" jdbcType="INTEGER" property="newStatus" />
     <result column="recommend_status" jdbcType="INTEGER" property="recommendStatus" />
-    <result column="verify_status" jdbcType="INTEGER" property="verifyStatus" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
-    <result column="sale" jdbcType="INTEGER" property="sale" />
-    <result column="price" jdbcType="DECIMAL" property="price" />
-    <result column="promotion_price" jdbcType="DECIMAL" property="promotionPrice" />
     <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
     <result column="keywords" jdbcType="VARCHAR" property="keywords" />
-    <result column="album_pics" jdbcType="VARCHAR" property="albumPics" />
     <result column="detail_title" jdbcType="VARCHAR" property="detailTitle" />
     <result column="product_category_name" jdbcType="VARCHAR" property="productCategoryName" />
     <result column="region_id" jdbcType="BIGINT" property="regionId" />
@@ -27,9 +21,11 @@
     <result column="charge_standard_id" jdbcType="BIGINT" property="chargeStandardId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="common_cost" jdbcType="VARCHAR" property="commonCost" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.macro.mall.model.PmsProduct">
     <result column="description" jdbcType="LONGVARCHAR" property="description" />
+    <result column="album_pics" jdbcType="LONGVARCHAR" property="albumPics" />
     <result column="detail_desc" jdbcType="LONGVARCHAR" property="detailDesc" />
     <result column="detail_html" jdbcType="LONGVARCHAR" property="detailHtml" />
     <result column="charge_standard_json" jdbcType="LONGVARCHAR" property="chargeStandardJson" />
@@ -94,12 +90,11 @@
   </sql>
   <sql id="Base_Column_List">
     id, product_category_id, `name`, pic, product_sn, delete_status, publish_status, 
-    new_status, recommend_status, verify_status, sort, sale, price, promotion_price, 
-    sub_title, keywords, album_pics, detail_title, product_category_name, region_id, 
-    region, is_bargain, charge_standard_id, create_time, update_time
+    recommend_status, sort, sub_title, keywords, detail_title, product_category_name, 
+    region_id, region, is_bargain, charge_standard_id, create_time, update_time, common_cost
   </sql>
   <sql id="Blob_Column_List">
-    description, detail_desc, detail_html, charge_standard_json
+    description, album_pics, detail_desc, detail_html, charge_standard_json
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="com.macro.mall.example.PmsProductExample" resultMap="ResultMapWithBLOBs">
     select
@@ -197,24 +192,22 @@
     </selectKey>
     insert into pms_product (product_category_id, `name`, pic, 
       product_sn, delete_status, publish_status, 
-      new_status, recommend_status, verify_status, 
-      sort, sale, price, 
-      promotion_price, sub_title, keywords, 
-      album_pics, detail_title, product_category_name, 
+      recommend_status, sort, sub_title, 
+      keywords, detail_title, product_category_name, 
       region_id, region, is_bargain, 
       charge_standard_id, create_time, update_time, 
-      description, detail_desc, detail_html, 
-      charge_standard_json)
+      common_cost, description, album_pics, 
+      detail_desc, detail_html, charge_standard_json
+      )
     values (#{productCategoryId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, 
       #{productSn,jdbcType=VARCHAR}, #{deleteStatus,jdbcType=INTEGER}, #{publishStatus,jdbcType=INTEGER}, 
-      #{newStatus,jdbcType=INTEGER}, #{recommendStatus,jdbcType=INTEGER}, #{verifyStatus,jdbcType=INTEGER}, 
-      #{sort,jdbcType=INTEGER}, #{sale,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
-      #{promotionPrice,jdbcType=DECIMAL}, #{subTitle,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, 
-      #{albumPics,jdbcType=VARCHAR}, #{detailTitle,jdbcType=VARCHAR}, #{productCategoryName,jdbcType=VARCHAR}, 
+      #{recommendStatus,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{subTitle,jdbcType=VARCHAR}, 
+      #{keywords,jdbcType=VARCHAR}, #{detailTitle,jdbcType=VARCHAR}, #{productCategoryName,jdbcType=VARCHAR}, 
       #{regionId,jdbcType=BIGINT}, #{region,jdbcType=VARCHAR}, #{isBargain,jdbcType=INTEGER}, 
       #{chargeStandardId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{description,jdbcType=LONGVARCHAR}, #{detailDesc,jdbcType=LONGVARCHAR}, #{detailHtml,jdbcType=LONGVARCHAR}, 
-      #{chargeStandardJson,jdbcType=LONGVARCHAR})
+      #{commonCost,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR}, #{albumPics,jdbcType=LONGVARCHAR}, 
+      #{detailDesc,jdbcType=LONGVARCHAR}, #{detailHtml,jdbcType=LONGVARCHAR}, #{chargeStandardJson,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="map">
     <selectKey keyProperty="record.id" order="AFTER" resultType="java.lang.Long">
@@ -247,35 +240,17 @@
           <if test="record.publishStatus != null">
             publish_status,
           </if>
-          <if test="record.newStatus != null">
-            new_status,
-          </if>
           <if test="record.recommendStatus != null">
             recommend_status,
           </if>
-          <if test="record.verifyStatus != null">
-            verify_status,
-          </if>
           <if test="record.sort != null">
             sort,
-          </if>
-          <if test="record.sale != null">
-            sale,
-          </if>
-          <if test="record.price != null">
-            price,
-          </if>
-          <if test="record.promotionPrice != null">
-            promotion_price,
           </if>
           <if test="record.subTitle != null">
             sub_title,
           </if>
           <if test="record.keywords != null">
             keywords,
-          </if>
-          <if test="record.albumPics != null">
-            album_pics,
           </if>
           <if test="record.detailTitle != null">
             detail_title,
@@ -301,8 +276,14 @@
           <if test="record.updateTime != null">
             update_time,
           </if>
+          <if test="record.commonCost != null">
+            common_cost,
+          </if>
           <if test="record.description != null">
             description,
+          </if>
+          <if test="record.albumPics != null">
+            album_pics,
           </if>
           <if test="record.detailDesc != null">
             detail_desc,
@@ -344,35 +325,17 @@
           <if test="record.publishStatus != null">
             #{record.publishStatus,jdbcType=INTEGER},
           </if>
-          <if test="record.newStatus != null">
-            #{record.newStatus,jdbcType=INTEGER},
-          </if>
           <if test="record.recommendStatus != null">
             #{record.recommendStatus,jdbcType=INTEGER},
           </if>
-          <if test="record.verifyStatus != null">
-            #{record.verifyStatus,jdbcType=INTEGER},
-          </if>
           <if test="record.sort != null">
             #{record.sort,jdbcType=INTEGER},
-          </if>
-          <if test="record.sale != null">
-            #{record.sale,jdbcType=INTEGER},
-          </if>
-          <if test="record.price != null">
-            #{record.price,jdbcType=DECIMAL},
-          </if>
-          <if test="record.promotionPrice != null">
-            #{record.promotionPrice,jdbcType=DECIMAL},
           </if>
           <if test="record.subTitle != null">
             #{record.subTitle,jdbcType=VARCHAR},
           </if>
           <if test="record.keywords != null">
             #{record.keywords,jdbcType=VARCHAR},
-          </if>
-          <if test="record.albumPics != null">
-            #{record.albumPics,jdbcType=VARCHAR},
           </if>
           <if test="record.detailTitle != null">
             #{record.detailTitle,jdbcType=VARCHAR},
@@ -398,8 +361,14 @@
           <if test="record.updateTime != null">
             #{record.updateTime,jdbcType=TIMESTAMP},
           </if>
+          <if test="record.commonCost != null">
+            #{record.commonCost,jdbcType=VARCHAR},
+          </if>
           <if test="record.description != null">
             #{record.description,jdbcType=LONGVARCHAR},
+          </if>
+          <if test="record.albumPics != null">
+            #{record.albumPics,jdbcType=LONGVARCHAR},
           </if>
           <if test="record.detailDesc != null">
             #{record.detailDesc,jdbcType=LONGVARCHAR},
@@ -452,35 +421,17 @@
           <if test="record.publishStatus != null">
             publish_status = #{record.publishStatus,jdbcType=INTEGER},
           </if>
-          <if test="record.newStatus != null">
-            new_status = #{record.newStatus,jdbcType=INTEGER},
-          </if>
           <if test="record.recommendStatus != null">
             recommend_status = #{record.recommendStatus,jdbcType=INTEGER},
           </if>
-          <if test="record.verifyStatus != null">
-            verify_status = #{record.verifyStatus,jdbcType=INTEGER},
-          </if>
           <if test="record.sort != null">
             sort = #{record.sort,jdbcType=INTEGER},
-          </if>
-          <if test="record.sale != null">
-            sale = #{record.sale,jdbcType=INTEGER},
-          </if>
-          <if test="record.price != null">
-            price = #{record.price,jdbcType=DECIMAL},
-          </if>
-          <if test="record.promotionPrice != null">
-            promotion_price = #{record.promotionPrice,jdbcType=DECIMAL},
           </if>
           <if test="record.subTitle != null">
             sub_title = #{record.subTitle,jdbcType=VARCHAR},
           </if>
           <if test="record.keywords != null">
             keywords = #{record.keywords,jdbcType=VARCHAR},
-          </if>
-          <if test="record.albumPics != null">
-            album_pics = #{record.albumPics,jdbcType=VARCHAR},
           </if>
           <if test="record.detailTitle != null">
             detail_title = #{record.detailTitle,jdbcType=VARCHAR},
@@ -506,8 +457,14 @@
           <if test="record.updateTime != null">
             update_time = #{record.updateTime,jdbcType=TIMESTAMP},
           </if>
+          <if test="record.commonCost != null">
+            common_cost = #{record.commonCost,jdbcType=VARCHAR},
+          </if>
           <if test="record.description != null">
             description = #{record.description,jdbcType=LONGVARCHAR},
+          </if>
+          <if test="record.albumPics != null">
+            album_pics = #{record.albumPics,jdbcType=LONGVARCHAR},
           </if>
           <if test="record.detailDesc != null">
             detail_desc = #{record.detailDesc,jdbcType=LONGVARCHAR},
@@ -534,16 +491,10 @@
       product_sn = #{record.productSn,jdbcType=VARCHAR},
       delete_status = #{record.deleteStatus,jdbcType=INTEGER},
       publish_status = #{record.publishStatus,jdbcType=INTEGER},
-      new_status = #{record.newStatus,jdbcType=INTEGER},
       recommend_status = #{record.recommendStatus,jdbcType=INTEGER},
-      verify_status = #{record.verifyStatus,jdbcType=INTEGER},
       sort = #{record.sort,jdbcType=INTEGER},
-      sale = #{record.sale,jdbcType=INTEGER},
-      price = #{record.price,jdbcType=DECIMAL},
-      promotion_price = #{record.promotionPrice,jdbcType=DECIMAL},
       sub_title = #{record.subTitle,jdbcType=VARCHAR},
       keywords = #{record.keywords,jdbcType=VARCHAR},
-      album_pics = #{record.albumPics,jdbcType=VARCHAR},
       detail_title = #{record.detailTitle,jdbcType=VARCHAR},
       product_category_name = #{record.productCategoryName,jdbcType=VARCHAR},
       region_id = #{record.regionId,jdbcType=BIGINT},
@@ -552,7 +503,9 @@
       charge_standard_id = #{record.chargeStandardId,jdbcType=BIGINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      common_cost = #{record.commonCost,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=LONGVARCHAR},
+      album_pics = #{record.albumPics,jdbcType=LONGVARCHAR},
       detail_desc = #{record.detailDesc,jdbcType=LONGVARCHAR},
       detail_html = #{record.detailHtml,jdbcType=LONGVARCHAR},
       charge_standard_json = #{record.chargeStandardJson,jdbcType=LONGVARCHAR}
@@ -569,16 +522,10 @@
       product_sn = #{record.productSn,jdbcType=VARCHAR},
       delete_status = #{record.deleteStatus,jdbcType=INTEGER},
       publish_status = #{record.publishStatus,jdbcType=INTEGER},
-      new_status = #{record.newStatus,jdbcType=INTEGER},
       recommend_status = #{record.recommendStatus,jdbcType=INTEGER},
-      verify_status = #{record.verifyStatus,jdbcType=INTEGER},
       sort = #{record.sort,jdbcType=INTEGER},
-      sale = #{record.sale,jdbcType=INTEGER},
-      price = #{record.price,jdbcType=DECIMAL},
-      promotion_price = #{record.promotionPrice,jdbcType=DECIMAL},
       sub_title = #{record.subTitle,jdbcType=VARCHAR},
       keywords = #{record.keywords,jdbcType=VARCHAR},
-      album_pics = #{record.albumPics,jdbcType=VARCHAR},
       detail_title = #{record.detailTitle,jdbcType=VARCHAR},
       product_category_name = #{record.productCategoryName,jdbcType=VARCHAR},
       region_id = #{record.regionId,jdbcType=BIGINT},
@@ -586,7 +533,8 @@
       is_bargain = #{record.isBargain,jdbcType=INTEGER},
       charge_standard_id = #{record.chargeStandardId,jdbcType=BIGINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      common_cost = #{record.commonCost,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -620,35 +568,17 @@
           <if test="record.publishStatus != null">
             publish_status = #{record.publishStatus,jdbcType=INTEGER},
           </if>
-          <if test="record.newStatus != null">
-            new_status = #{record.newStatus,jdbcType=INTEGER},
-          </if>
           <if test="record.recommendStatus != null">
             recommend_status = #{record.recommendStatus,jdbcType=INTEGER},
           </if>
-          <if test="record.verifyStatus != null">
-            verify_status = #{record.verifyStatus,jdbcType=INTEGER},
-          </if>
           <if test="record.sort != null">
             sort = #{record.sort,jdbcType=INTEGER},
-          </if>
-          <if test="record.sale != null">
-            sale = #{record.sale,jdbcType=INTEGER},
-          </if>
-          <if test="record.price != null">
-            price = #{record.price,jdbcType=DECIMAL},
-          </if>
-          <if test="record.promotionPrice != null">
-            promotion_price = #{record.promotionPrice,jdbcType=DECIMAL},
           </if>
           <if test="record.subTitle != null">
             sub_title = #{record.subTitle,jdbcType=VARCHAR},
           </if>
           <if test="record.keywords != null">
             keywords = #{record.keywords,jdbcType=VARCHAR},
-          </if>
-          <if test="record.albumPics != null">
-            album_pics = #{record.albumPics,jdbcType=VARCHAR},
           </if>
           <if test="record.detailTitle != null">
             detail_title = #{record.detailTitle,jdbcType=VARCHAR},
@@ -674,8 +604,14 @@
           <if test="record.updateTime != null">
             update_time = #{record.updateTime,jdbcType=TIMESTAMP},
           </if>
+          <if test="record.commonCost != null">
+            common_cost = #{record.commonCost,jdbcType=VARCHAR},
+          </if>
           <if test="record.description != null">
             description = #{record.description,jdbcType=LONGVARCHAR},
+          </if>
+          <if test="record.albumPics != null">
+            album_pics = #{record.albumPics,jdbcType=LONGVARCHAR},
           </if>
           <if test="record.detailDesc != null">
             detail_desc = #{record.detailDesc,jdbcType=LONGVARCHAR},
@@ -699,16 +635,10 @@
       product_sn = #{productSn,jdbcType=VARCHAR},
       delete_status = #{deleteStatus,jdbcType=INTEGER},
       publish_status = #{publishStatus,jdbcType=INTEGER},
-      new_status = #{newStatus,jdbcType=INTEGER},
       recommend_status = #{recommendStatus,jdbcType=INTEGER},
-      verify_status = #{verifyStatus,jdbcType=INTEGER},
       sort = #{sort,jdbcType=INTEGER},
-      sale = #{sale,jdbcType=INTEGER},
-      price = #{price,jdbcType=DECIMAL},
-      promotion_price = #{promotionPrice,jdbcType=DECIMAL},
       sub_title = #{subTitle,jdbcType=VARCHAR},
       keywords = #{keywords,jdbcType=VARCHAR},
-      album_pics = #{albumPics,jdbcType=VARCHAR},
       detail_title = #{detailTitle,jdbcType=VARCHAR},
       product_category_name = #{productCategoryName,jdbcType=VARCHAR},
       region_id = #{regionId,jdbcType=BIGINT},
@@ -717,7 +647,9 @@
       charge_standard_id = #{chargeStandardId,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
+      common_cost = #{commonCost,jdbcType=VARCHAR},
       description = #{description,jdbcType=LONGVARCHAR},
+      album_pics = #{albumPics,jdbcType=LONGVARCHAR},
       detail_desc = #{detailDesc,jdbcType=LONGVARCHAR},
       detail_html = #{detailHtml,jdbcType=LONGVARCHAR},
       charge_standard_json = #{chargeStandardJson,jdbcType=LONGVARCHAR}
@@ -731,16 +663,10 @@
       product_sn = #{productSn,jdbcType=VARCHAR},
       delete_status = #{deleteStatus,jdbcType=INTEGER},
       publish_status = #{publishStatus,jdbcType=INTEGER},
-      new_status = #{newStatus,jdbcType=INTEGER},
       recommend_status = #{recommendStatus,jdbcType=INTEGER},
-      verify_status = #{verifyStatus,jdbcType=INTEGER},
       sort = #{sort,jdbcType=INTEGER},
-      sale = #{sale,jdbcType=INTEGER},
-      price = #{price,jdbcType=DECIMAL},
-      promotion_price = #{promotionPrice,jdbcType=DECIMAL},
       sub_title = #{subTitle,jdbcType=VARCHAR},
       keywords = #{keywords,jdbcType=VARCHAR},
-      album_pics = #{albumPics,jdbcType=VARCHAR},
       detail_title = #{detailTitle,jdbcType=VARCHAR},
       product_category_name = #{productCategoryName,jdbcType=VARCHAR},
       region_id = #{regionId,jdbcType=BIGINT},
@@ -748,7 +674,8 @@
       is_bargain = #{isBargain,jdbcType=INTEGER},
       charge_standard_id = #{chargeStandardId,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      common_cost = #{commonCost,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectOneByExample" parameterType="com.macro.mall.example.PmsProductExample" resultMap="BaseResultMap">
@@ -802,24 +729,22 @@
   </select>
   <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
     insert into pms_product
-    (product_category_id, `name`, pic, product_sn, delete_status, publish_status, new_status, 
-      recommend_status, verify_status, sort, sale, price, promotion_price, sub_title, 
-      keywords, album_pics, detail_title, product_category_name, region_id, region, is_bargain, 
-      charge_standard_id, create_time, update_time, description, detail_desc, detail_html, 
-      charge_standard_json)
+    (product_category_id, `name`, pic, product_sn, delete_status, publish_status, recommend_status, 
+      sort, sub_title, keywords, detail_title, product_category_name, region_id, region, 
+      is_bargain, charge_standard_id, create_time, update_time, common_cost, description, 
+      album_pics, detail_desc, detail_html, charge_standard_json)
     values
     <foreach collection="list" item="item" separator=",">
       (#{item.productCategoryId,jdbcType=BIGINT}, #{item.name,jdbcType=VARCHAR}, #{item.pic,jdbcType=VARCHAR}, 
         #{item.productSn,jdbcType=VARCHAR}, #{item.deleteStatus,jdbcType=INTEGER}, #{item.publishStatus,jdbcType=INTEGER}, 
-        #{item.newStatus,jdbcType=INTEGER}, #{item.recommendStatus,jdbcType=INTEGER}, #{item.verifyStatus,jdbcType=INTEGER}, 
-        #{item.sort,jdbcType=INTEGER}, #{item.sale,jdbcType=INTEGER}, #{item.price,jdbcType=DECIMAL}, 
-        #{item.promotionPrice,jdbcType=DECIMAL}, #{item.subTitle,jdbcType=VARCHAR}, #{item.keywords,jdbcType=VARCHAR}, 
-        #{item.albumPics,jdbcType=VARCHAR}, #{item.detailTitle,jdbcType=VARCHAR}, #{item.productCategoryName,jdbcType=VARCHAR}, 
+        #{item.recommendStatus,jdbcType=INTEGER}, #{item.sort,jdbcType=INTEGER}, #{item.subTitle,jdbcType=VARCHAR}, 
+        #{item.keywords,jdbcType=VARCHAR}, #{item.detailTitle,jdbcType=VARCHAR}, #{item.productCategoryName,jdbcType=VARCHAR}, 
         #{item.regionId,jdbcType=BIGINT}, #{item.region,jdbcType=VARCHAR}, #{item.isBargain,jdbcType=INTEGER}, 
         #{item.chargeStandardId,jdbcType=BIGINT}, #{item.createTime,jdbcType=TIMESTAMP}, 
-        #{item.updateTime,jdbcType=TIMESTAMP}, #{item.description,jdbcType=LONGVARCHAR}, 
-        #{item.detailDesc,jdbcType=LONGVARCHAR}, #{item.detailHtml,jdbcType=LONGVARCHAR}, 
-        #{item.chargeStandardJson,jdbcType=LONGVARCHAR})
+        #{item.updateTime,jdbcType=TIMESTAMP}, #{item.commonCost,jdbcType=VARCHAR}, #{item.description,jdbcType=LONGVARCHAR}, 
+        #{item.albumPics,jdbcType=LONGVARCHAR}, #{item.detailDesc,jdbcType=LONGVARCHAR}, 
+        #{item.detailHtml,jdbcType=LONGVARCHAR}, #{item.chargeStandardJson,jdbcType=LONGVARCHAR}
+        )
     </foreach>
   </insert>
   <insert id="batchInsertSelective" keyColumn="id" keyProperty="list.id" parameterType="map" useGeneratedKeys="true">
@@ -850,35 +775,17 @@
         <if test="'publish_status'.toString() == column.value">
           #{item.publishStatus,jdbcType=INTEGER}
         </if>
-        <if test="'new_status'.toString() == column.value">
-          #{item.newStatus,jdbcType=INTEGER}
-        </if>
         <if test="'recommend_status'.toString() == column.value">
           #{item.recommendStatus,jdbcType=INTEGER}
         </if>
-        <if test="'verify_status'.toString() == column.value">
-          #{item.verifyStatus,jdbcType=INTEGER}
-        </if>
         <if test="'sort'.toString() == column.value">
           #{item.sort,jdbcType=INTEGER}
-        </if>
-        <if test="'sale'.toString() == column.value">
-          #{item.sale,jdbcType=INTEGER}
-        </if>
-        <if test="'price'.toString() == column.value">
-          #{item.price,jdbcType=DECIMAL}
-        </if>
-        <if test="'promotion_price'.toString() == column.value">
-          #{item.promotionPrice,jdbcType=DECIMAL}
         </if>
         <if test="'sub_title'.toString() == column.value">
           #{item.subTitle,jdbcType=VARCHAR}
         </if>
         <if test="'keywords'.toString() == column.value">
           #{item.keywords,jdbcType=VARCHAR}
-        </if>
-        <if test="'album_pics'.toString() == column.value">
-          #{item.albumPics,jdbcType=VARCHAR}
         </if>
         <if test="'detail_title'.toString() == column.value">
           #{item.detailTitle,jdbcType=VARCHAR}
@@ -904,8 +811,14 @@
         <if test="'update_time'.toString() == column.value">
           #{item.updateTime,jdbcType=TIMESTAMP}
         </if>
+        <if test="'common_cost'.toString() == column.value">
+          #{item.commonCost,jdbcType=VARCHAR}
+        </if>
         <if test="'description'.toString() == column.value">
           #{item.description,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="'album_pics'.toString() == column.value">
+          #{item.albumPics,jdbcType=LONGVARCHAR}
         </if>
         <if test="'detail_desc'.toString() == column.value">
           #{item.detailDesc,jdbcType=LONGVARCHAR}

@@ -217,7 +217,7 @@ public class YxxOrderCommonService {
         if (!result) {
             return 0;
         }
-        // 判断数量
+        this.updateWorkerOrderCount(workerId, order);
         orderStatusRecordMapper.insert(YxxOrderStatusRecord.builder()
                 .createTime(new Date()).remark("管理员手动指派订单").orderId(orderId)
                 .originStatus(DISTRIBUTING.val()).currentStatus(RECEIVED.val())

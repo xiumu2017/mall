@@ -1,7 +1,6 @@
 package com.macro.mall.example;
 
 import com.macro.mall.model.PmsProduct;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -805,96 +804,6 @@ public class PmsProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andNewStatusIsNull() {
-            addCriterion("new_status is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewStatusIsNotNull() {
-            addCriterion("new_status is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewStatusEqualTo(Integer value) {
-            addCriterion("new_status =", value, "newStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewStatusEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("new_status = ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andNewStatusNotEqualTo(Integer value) {
-            addCriterion("new_status <>", value, "newStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewStatusNotEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("new_status <> ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andNewStatusGreaterThan(Integer value) {
-            addCriterion("new_status >", value, "newStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewStatusGreaterThanColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("new_status > ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andNewStatusGreaterThanOrEqualTo(Integer value) {
-            addCriterion("new_status >=", value, "newStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewStatusGreaterThanOrEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("new_status >= ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andNewStatusLessThan(Integer value) {
-            addCriterion("new_status <", value, "newStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewStatusLessThanColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("new_status < ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andNewStatusLessThanOrEqualTo(Integer value) {
-            addCriterion("new_status <=", value, "newStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewStatusLessThanOrEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("new_status <= ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andNewStatusIn(List<Integer> values) {
-            addCriterion("new_status in", values, "newStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewStatusNotIn(List<Integer> values) {
-            addCriterion("new_status not in", values, "newStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewStatusBetween(Integer value1, Integer value2) {
-            addCriterion("new_status between", value1, value2, "newStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewStatusNotBetween(Integer value1, Integer value2) {
-            addCriterion("new_status not between", value1, value2, "newStatus");
-            return (Criteria) this;
-        }
-
         public Criteria andRecommendStatusIsNull() {
             addCriterion("recommend_status is null");
             return (Criteria) this;
@@ -985,96 +894,6 @@ public class PmsProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andVerifyStatusIsNull() {
-            addCriterion("verify_status is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyStatusIsNotNull() {
-            addCriterion("verify_status is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyStatusEqualTo(Integer value) {
-            addCriterion("verify_status =", value, "verifyStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyStatusEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("verify_status = ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyStatusNotEqualTo(Integer value) {
-            addCriterion("verify_status <>", value, "verifyStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyStatusNotEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("verify_status <> ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyStatusGreaterThan(Integer value) {
-            addCriterion("verify_status >", value, "verifyStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyStatusGreaterThanColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("verify_status > ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyStatusGreaterThanOrEqualTo(Integer value) {
-            addCriterion("verify_status >=", value, "verifyStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyStatusGreaterThanOrEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("verify_status >= ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyStatusLessThan(Integer value) {
-            addCriterion("verify_status <", value, "verifyStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyStatusLessThanColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("verify_status < ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyStatusLessThanOrEqualTo(Integer value) {
-            addCriterion("verify_status <=", value, "verifyStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyStatusLessThanOrEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("verify_status <= ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyStatusIn(List<Integer> values) {
-            addCriterion("verify_status in", values, "verifyStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyStatusNotIn(List<Integer> values) {
-            addCriterion("verify_status not in", values, "verifyStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyStatusBetween(Integer value1, Integer value2) {
-            addCriterion("verify_status between", value1, value2, "verifyStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyStatusNotBetween(Integer value1, Integer value2) {
-            addCriterion("verify_status not between", value1, value2, "verifyStatus");
-            return (Criteria) this;
-        }
-
         public Criteria andSortIsNull() {
             addCriterion("sort is null");
             return (Criteria) this;
@@ -1162,276 +981,6 @@ public class PmsProductExample {
 
         public Criteria andSortNotBetween(Integer value1, Integer value2) {
             addCriterion("sort not between", value1, value2, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaleIsNull() {
-            addCriterion("sale is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaleIsNotNull() {
-            addCriterion("sale is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaleEqualTo(Integer value) {
-            addCriterion("sale =", value, "sale");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaleEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("sale = ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andSaleNotEqualTo(Integer value) {
-            addCriterion("sale <>", value, "sale");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaleNotEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("sale <> ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andSaleGreaterThan(Integer value) {
-            addCriterion("sale >", value, "sale");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaleGreaterThanColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("sale > ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andSaleGreaterThanOrEqualTo(Integer value) {
-            addCriterion("sale >=", value, "sale");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaleGreaterThanOrEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("sale >= ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andSaleLessThan(Integer value) {
-            addCriterion("sale <", value, "sale");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaleLessThanColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("sale < ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andSaleLessThanOrEqualTo(Integer value) {
-            addCriterion("sale <=", value, "sale");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaleLessThanOrEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("sale <= ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andSaleIn(List<Integer> values) {
-            addCriterion("sale in", values, "sale");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaleNotIn(List<Integer> values) {
-            addCriterion("sale not in", values, "sale");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaleBetween(Integer value1, Integer value2) {
-            addCriterion("sale between", value1, value2, "sale");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaleNotBetween(Integer value1, Integer value2) {
-            addCriterion("sale not between", value1, value2, "sale");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceIsNull() {
-            addCriterion("price is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceIsNotNull() {
-            addCriterion("price is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceEqualTo(BigDecimal value) {
-            addCriterion("price =", value, "price");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("price = ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceNotEqualTo(BigDecimal value) {
-            addCriterion("price <>", value, "price");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceNotEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("price <> ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceGreaterThan(BigDecimal value) {
-            addCriterion("price >", value, "price");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceGreaterThanColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("price > ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("price >=", value, "price");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceGreaterThanOrEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("price >= ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceLessThan(BigDecimal value) {
-            addCriterion("price <", value, "price");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceLessThanColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("price < ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("price <=", value, "price");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceLessThanOrEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("price <= ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceIn(List<BigDecimal> values) {
-            addCriterion("price in", values, "price");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceNotIn(List<BigDecimal> values) {
-            addCriterion("price not in", values, "price");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("price between", value1, value2, "price");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("price not between", value1, value2, "price");
-            return (Criteria) this;
-        }
-
-        public Criteria andPromotionPriceIsNull() {
-            addCriterion("promotion_price is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPromotionPriceIsNotNull() {
-            addCriterion("promotion_price is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPromotionPriceEqualTo(BigDecimal value) {
-            addCriterion("promotion_price =", value, "promotionPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andPromotionPriceEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("promotion_price = ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andPromotionPriceNotEqualTo(BigDecimal value) {
-            addCriterion("promotion_price <>", value, "promotionPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andPromotionPriceNotEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("promotion_price <> ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andPromotionPriceGreaterThan(BigDecimal value) {
-            addCriterion("promotion_price >", value, "promotionPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andPromotionPriceGreaterThanColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("promotion_price > ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andPromotionPriceGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("promotion_price >=", value, "promotionPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andPromotionPriceGreaterThanOrEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("promotion_price >= ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andPromotionPriceLessThan(BigDecimal value) {
-            addCriterion("promotion_price <", value, "promotionPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andPromotionPriceLessThanColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("promotion_price < ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andPromotionPriceLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("promotion_price <=", value, "promotionPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andPromotionPriceLessThanOrEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("promotion_price <= ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andPromotionPriceIn(List<BigDecimal> values) {
-            addCriterion("promotion_price in", values, "promotionPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andPromotionPriceNotIn(List<BigDecimal> values) {
-            addCriterion("promotion_price not in", values, "promotionPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andPromotionPriceBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("promotion_price between", value1, value2, "promotionPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andPromotionPriceNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("promotion_price not between", value1, value2, "promotionPrice");
             return (Criteria) this;
         }
 
@@ -1632,106 +1181,6 @@ public class PmsProductExample {
 
         public Criteria andKeywordsNotBetween(String value1, String value2) {
             addCriterion("keywords not between", value1, value2, "keywords");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsIsNull() {
-            addCriterion("album_pics is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsIsNotNull() {
-            addCriterion("album_pics is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsEqualTo(String value) {
-            addCriterion("album_pics =", value, "albumPics");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("album_pics = ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsNotEqualTo(String value) {
-            addCriterion("album_pics <>", value, "albumPics");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsNotEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("album_pics <> ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsGreaterThan(String value) {
-            addCriterion("album_pics >", value, "albumPics");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsGreaterThanColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("album_pics > ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsGreaterThanOrEqualTo(String value) {
-            addCriterion("album_pics >=", value, "albumPics");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsGreaterThanOrEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("album_pics >= ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsLessThan(String value) {
-            addCriterion("album_pics <", value, "albumPics");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsLessThanColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("album_pics < ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsLessThanOrEqualTo(String value) {
-            addCriterion("album_pics <=", value, "albumPics");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsLessThanOrEqualToColumn(PmsProduct.Column column) {
-            addCriterion(new StringBuilder("album_pics <= ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsLike(String value) {
-            addCriterion("album_pics like", value, "albumPics");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsNotLike(String value) {
-            addCriterion("album_pics not like", value, "albumPics");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsIn(List<String> values) {
-            addCriterion("album_pics in", values, "albumPics");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsNotIn(List<String> values) {
-            addCriterion("album_pics not in", values, "albumPics");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsBetween(String value1, String value2) {
-            addCriterion("album_pics between", value1, value2, "albumPics");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumPicsNotBetween(String value1, String value2) {
-            addCriterion("album_pics not between", value1, value2, "albumPics");
             return (Criteria) this;
         }
 
@@ -2482,6 +1931,106 @@ public class PmsProductExample {
 
         public Criteria andUpdateTimeNotBetween(Date value1, Date value2) {
             addCriterion("update_time not between", value1, value2, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostIsNull() {
+            addCriterion("common_cost is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostIsNotNull() {
+            addCriterion("common_cost is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostEqualTo(String value) {
+            addCriterion("common_cost =", value, "commonCost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostEqualToColumn(PmsProduct.Column column) {
+            addCriterion(new StringBuilder("common_cost = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostNotEqualTo(String value) {
+            addCriterion("common_cost <>", value, "commonCost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostNotEqualToColumn(PmsProduct.Column column) {
+            addCriterion(new StringBuilder("common_cost <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostGreaterThan(String value) {
+            addCriterion("common_cost >", value, "commonCost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostGreaterThanColumn(PmsProduct.Column column) {
+            addCriterion(new StringBuilder("common_cost > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostGreaterThanOrEqualTo(String value) {
+            addCriterion("common_cost >=", value, "commonCost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostGreaterThanOrEqualToColumn(PmsProduct.Column column) {
+            addCriterion(new StringBuilder("common_cost >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostLessThan(String value) {
+            addCriterion("common_cost <", value, "commonCost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostLessThanColumn(PmsProduct.Column column) {
+            addCriterion(new StringBuilder("common_cost < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostLessThanOrEqualTo(String value) {
+            addCriterion("common_cost <=", value, "commonCost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostLessThanOrEqualToColumn(PmsProduct.Column column) {
+            addCriterion(new StringBuilder("common_cost <= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostLike(String value) {
+            addCriterion("common_cost like", value, "commonCost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostNotLike(String value) {
+            addCriterion("common_cost not like", value, "commonCost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostIn(List<String> values) {
+            addCriterion("common_cost in", values, "commonCost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostNotIn(List<String> values) {
+            addCriterion("common_cost not in", values, "commonCost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostBetween(String value1, String value2) {
+            addCriterion("common_cost between", value1, value2, "commonCost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommonCostNotBetween(String value1, String value2) {
+            addCriterion("common_cost not between", value1, value2, "commonCost");
             return (Criteria) this;
         }
     }

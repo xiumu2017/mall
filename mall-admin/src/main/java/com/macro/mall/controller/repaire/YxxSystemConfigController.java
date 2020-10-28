@@ -167,7 +167,6 @@ public class YxxSystemConfigController {
         YxxHomeCostExample example = new YxxHomeCostExample();
         example.createCriteria().when(regionId != null,
                 criteria -> criteria.andRegionIdEqualTo(regionId));
-        example.setOrderByClause("sort");
         List<YxxHomeCost> list = costMapper.selectByExample(example);
         return CommonResult.success(list);
     }

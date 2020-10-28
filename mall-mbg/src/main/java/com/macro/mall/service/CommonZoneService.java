@@ -63,6 +63,14 @@ public class CommonZoneService {
                 .example().orderBy(YxxZoneApply.Column.applyTime.desc()));
     }
 
+    public List<YxxZoneApply> queryZoneApplyListByAdmin(Integer pageNum, Integer pageSize, Integer status, Long regionId) {
+        PageHelper.startPage(pageNum, pageSize);
+        return zoneApplyMapper.selectByExample(new YxxZoneApplyExample().createCriteria()
+                .when(regionId != null, criteria -> criteria.andRegionIdEqualTo(regionId))
+                .when(status != null, criteria -> criteria.andApplyStatusEqualTo(status))
+                .example().orderBy(YxxZoneApply.Column.applyTime.desc()));
+    }
+
     public List<YxxZoneApply> queryZoneApplyListByZoneId(Long zoneId, Integer status) {
         return zoneApplyMapper.selectByExample(new YxxZoneApplyExample().createCriteria()
                 .when(zoneId != null, criteria -> criteria.andZoneIdEqualTo(zoneId))
