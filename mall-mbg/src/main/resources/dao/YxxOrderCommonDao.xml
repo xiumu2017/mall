@@ -186,4 +186,20 @@
         where product_id = #{productId,jdbcType=BIGINT}
           and label = #{label,jdbcType=VARCHAR}
     </update>
+
+    <update id="updateWorkerOrderAssignCount">
+        update yxx_worker_order_count
+        set assign_amount = assign_amount + 1
+        where worker_id = #{workerId,jdbcType=BIGINT}
+    </update>
+    <update id="updateWorkerOrderDistributeCount">
+        update yxx_worker_order_count
+        set distribute_amount = distribute_amount + 1
+        where worker_id = #{workerId,jdbcType=BIGINT}
+    </update>
+    <update id="updateWorkerOrderRushCount">
+        update yxx_worker_order_count
+        set rush_amount = rush_amount + 1
+        where worker_id = #{workerId,jdbcType=BIGINT}
+    </update>
 </mapper>

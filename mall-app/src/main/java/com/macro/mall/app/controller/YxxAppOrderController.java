@@ -141,17 +141,6 @@ public class YxxAppOrderController {
         return CommonResult.failed("抢单失败");
     }
 
-
-    @ApiOperation(value = "订单流程 - 已联系", hidden = true)
-    @PostMapping(value = "/wait-get")
-    public CommonResult waitGet(Long orderId) {
-        int x = yxxAppOrderService.waitGet(orderId);
-        if (x == 1) {
-            return CommonResult.success(null);
-        }
-        return CommonResult.failed();
-    }
-
     @ApiOperation("订单流程 - 出发")
     @PostMapping(value = "/set-off")
     public CommonResult setOff(Long orderId) {

@@ -52,14 +52,21 @@ public class CommonZoneService {
         return null;
     }
 
-    public List<ZoneWorkerInfo> zoneWorkerInfoList(Long zoneId, int pageNum, int pageSize) {
+    public List<ZoneWorkerInfo> zoneWorkerInfoList(String keyword, Long zoneId, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        return commonZoneDao.queryWorkersByZoneId(zoneId);
+        return commonZoneDao.queryWorkersByZoneId(zoneId, keyword);
     }
 
     public List<YxxZoneApply> queryZoneApplyList(Long workerId) {
         return zoneApplyMapper.selectByExample(new YxxZoneApplyExample().createCriteria()
                 .when(workerId != null, criteria -> criteria.andWorkerIdEqualTo(workerId))
+                .example().orderBy(YxxZoneApply.Column.applyTime.desc()));
+    }
+
+    public List<YxxZoneApply> queryZoneApplyListByZoneId(Long zoneId, Integer status) {
+        return zoneApplyMapper.selectByExample(new YxxZoneApplyExample().createCriteria()
+                .when(zoneId != null, criteria -> criteria.andZoneIdEqualTo(zoneId))
+                .when(status != null, criteria -> criteria.andApplyStatusEqualTo(status))
                 .example().orderBy(YxxZoneApply.Column.applyTime.desc()));
     }
 
@@ -89,7 +96,7 @@ public class CommonZoneService {
      * @param remark  备注
      * @return result
      */
-    public int zoneApplyAudit(Long applyId, UmsAdmin admin, int result, String remark) {
+    public int zoneApplyAudit(Long applyId, UmsAdmin admin, Integer result, String remark) {
         YxxZoneApply zoneApply = zoneApplyMapper.selectByPrimaryKey(applyId);
         // 审批拒绝
         if (result == 0) {
@@ -105,12 +112,12 @@ public class CommonZoneService {
                         .createTime(new Date()).cutPercent(new BigDecimal(0)).enable(1)
                         .isManual(0).regionId(zoneApply.getRegionId()).build();
                 zoneMapper.insert(zone);
-                zoneWorkerMapper.insert(YxxZoneWorker.builder()
+                zoneWorkerMapper.insert(YxxZoneWorker.builder().createTime(new Date())
                         .isAdmin(1).workerId(zoneApply.getWorkerId()).zoneId(zone.getId()).build());
                 zoneWalletMapper.insert(YxxZoneWallet.builder().balance(BigDecimal.ZERO).version(1).zoneId(zone.getId()).build());
             } else {
                 // 申请加入
-                zoneWorkerMapper.insert(YxxZoneWorker.builder()
+                zoneWorkerMapper.insert(YxxZoneWorker.builder().createTime(new Date())
                         .isAdmin(0).workerId(zoneApply.getWorkerId()).zoneId(zoneApply.getZoneId()).build());
             }
             zoneApply.setApplyStatus(1);

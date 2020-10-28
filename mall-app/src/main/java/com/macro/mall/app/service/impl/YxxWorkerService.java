@@ -222,7 +222,6 @@ public class YxxWorkerService {
         YxxWorker worker = this.getCurrentWorker();
         worker.setStatus(status);
         workerMapper.updateByPrimaryKeySelective(worker, YxxWorker.Column.status);
-        // TODO 如果有派单中的订单，直接拒接 ~
     }
 
     public int updateInfo(YxxWorkerUpdateParam worker) {

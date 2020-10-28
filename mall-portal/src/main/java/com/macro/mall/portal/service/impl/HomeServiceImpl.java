@@ -53,7 +53,7 @@ public class HomeServiceImpl implements HomeService {
 
     @Override
     public List<YxxRegion> getRegionList() {
-        return regionMapper.selectByExample(new YxxRegionExample());
+        return regionMapper.selectByExample(new YxxRegionExample().createCriteria().andEnableEqualTo(1).example());
     }
 
     @Override

@@ -54,6 +54,7 @@ secure:
       - /**/admin/logout
       - /**/minio/upload
       - /**/admin/pass/reset
+      - /**/redis/**
 
 aliyun:
   oss:

@@ -23,7 +23,7 @@ public class SchedulerJob {
         this.workerService = workerService;
     }
 
-    @Scheduled(cron = "1 0 0 1/1 * ? *")
+    @Scheduled(cron = "1 0 0 1/1 * *")
     public void resetWorkerOrderCount() {
         log.info("每日零点：开始重置会员订单数量");
         workerOrderCountMapper.updateByExampleSelective(
@@ -33,7 +33,7 @@ public class SchedulerJob {
         );
     }
 
-    @Scheduled(cron = "0 0 0 1/1 * ? *")
+    @Scheduled(cron = "0 0 0 1/1 * *")
     public void resetWorkerLevel() {
         log.info("每日零点：开始重置会员等级");
         int count = workerService.resetWorkerLevel();

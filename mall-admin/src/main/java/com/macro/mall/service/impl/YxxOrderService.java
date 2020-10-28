@@ -95,6 +95,7 @@ public class YxxOrderService {
         Long orderId = distributorService.popOrderId();
         if (orderId != null) {
             List<Long> workerIds = getSortedWorkerIds(orderId);
+            log.info("订单ID:{} 维修工列表：{}", orderId, workerIds);
             if (!workerIds.isEmpty()) {
                 distributorService.initWorkerQueue(orderId, workerIds);
                 // 派发订单

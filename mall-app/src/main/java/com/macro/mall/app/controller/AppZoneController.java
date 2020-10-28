@@ -7,6 +7,9 @@ import com.macro.mall.common.api.CommonResult;
 import com.macro.mall.domain.AppZoneInfo;
 import com.macro.mall.domain.ZoneSkilledProductInfo;
 import com.macro.mall.domain.ZoneWorkerInfo;
+import com.macro.mall.example.YxxRegionExample;
+import com.macro.mall.mapper.YxxRegionMapper;
+import com.macro.mall.model.YxxRegion;
 import com.macro.mall.model.YxxWorker;
 import com.macro.mall.model.YxxZone;
 import com.macro.mall.model.YxxZoneApply;
@@ -27,11 +30,13 @@ import java.util.List;
 public class AppZoneController {
     private final CommonZoneService commonZoneService;
     private final YxxWorkerService workerService;
+    private final YxxRegionMapper regionMapper;
 
     public AppZoneController(CommonZoneService commonZoneService,
-                             YxxWorkerService workerService) {
+                             YxxWorkerService workerService, YxxRegionMapper regionMapper) {
         this.commonZoneService = commonZoneService;
         this.workerService = workerService;
+        this.regionMapper = regionMapper;
     }
 
     @ApiOperation("查询区域服务中心列表")
@@ -58,7 +63,7 @@ public class AppZoneController {
         return CommonResult.failed();
     }
 
-    @ApiOperation("查询申请记录")
+    @ApiOperation("查询个人申请记录")
     @GetMapping("/apply/list")
     public CommonResult<List<YxxZoneApply>> queryZoneApplyList() {
         List<YxxZoneApply> applyList = commonZoneService.queryZoneApplyList(workerService.getCurrentWorker().getId());
@@ -68,10 +73,11 @@ public class AppZoneController {
     @ApiOperation("查询区域服务中心人员列表")
     @GetMapping("/worker/list")
     public CommonResult<CommonPage<ZoneWorkerInfo>> queryZoneWorkerList(
+            @RequestParam(required = false) String keyword,
             @RequestParam(required = false, defaultValue = "1") Integer pageNum,
             @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
         YxxWorker worker = workerService.getCurrentWorker();
-        List<ZoneWorkerInfo> workerInfoList = commonZoneService.zoneWorkerInfoList(worker.getZoneId(), pageNum, pageSize);
+        List<ZoneWorkerInfo> workerInfoList = commonZoneService.zoneWorkerInfoList(keyword, worker.getZoneId(), pageNum, pageSize);
         return CommonResult.success(CommonPage.restPage(workerInfoList));
     }
 
@@ -81,4 +87,37 @@ public class AppZoneController {
         YxxWorker worker = workerService.getCurrentWorker();
         return CommonResult.success(commonZoneService.zoneInfo(worker));
     }
+
+    @ApiOperation("查询地域列表")
+    @GetMapping("/region/ist")
+    public CommonResult<List<YxxRegion>> queryRegionList() {
+        List<YxxRegion> regions = regionMapper.selectByExample(new YxxRegionExample().createCriteria().andEnableEqualTo(1).example());
+        return CommonResult.success(regions);
+    }
+
+    @ApiOperation("管理员查询加入区域申请记录")
+    @GetMapping("/apply/join/list")
+    public CommonResult<List<YxxZoneApply>> queryZoneApplyList(@RequestParam Integer status) {
+        YxxWorker worker = workerService.getCurrentWorker();
+        Long zoneId = worker.getZoneId();
+        YxxZone zone = commonZoneService.zoneInfo(worker);
+        if (zone.getManagerWorker().equals(worker.getId())) {
+            return CommonResult.success(null);
+        }
+        List<YxxZoneApply> applyList = commonZoneService.queryZoneApplyListByZoneId(zoneId, status);
+        return CommonResult.success(applyList);
+    }
+
+    @ApiOperation("管理员审批加入区域申请")
+    @PostMapping("/apply/deal")
+    public CommonResult dealApply(@RequestParam Integer status,
+                                  @RequestParam Long applyId,
+                                  @RequestParam(required = false) String remark) {
+        int x = commonZoneService.zoneApplyAudit(applyId, null, status, remark);
+        if (x == 1) {
+            return CommonResult.success(x);
+        }
+        return CommonResult.failed();
+    }
+
 }

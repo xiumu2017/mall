@@ -13,12 +13,17 @@
 
     <select id="queryWorkersByZoneId" resultMap="zoneWorkerInfoMap">
         select yw.*,
-               zw.create_time join_time,
-               zw.is_admin
+        zw.create_time join_time,
+        zw.is_admin
         from yxx_worker yw
-                     left join yxx_zone_worker zw
-                on zw.worker_id = yw.id
+        left join yxx_zone_worker zw
+        on zw.worker_id = yw.id
         where zw.zone_id = #{zoneId,jdbcType=BIGINT}
+        <if test="keyword != null and keyword != ''">
+            and (yw.real_name like concat('%',#{keyword},'%') or
+            yw.phone like concat('%',#{keyword},'%') or
+            yw.username like concat('%',#{keyword},'%'))
+        </if>
     </select>
 
     <select id="querySkilledProInfoList" resultMap="zoneSkilledProductInfoMap">

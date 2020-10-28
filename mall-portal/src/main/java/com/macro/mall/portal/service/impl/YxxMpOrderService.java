@@ -7,6 +7,7 @@ import com.macro.mall.common.service.impl.DistributorService;
 import com.macro.mall.dao.YxxOrderCommonDao;
 import com.macro.mall.domain.YxxOrderInfo;
 import com.macro.mall.enums.OrderStatus;
+import com.macro.mall.enums.OrderStatusUtil;
 import com.macro.mall.example.YxxOrderExample;
 import com.macro.mall.example.YxxProductCommentLabelExample;
 import com.macro.mall.mapper.*;
@@ -68,17 +69,6 @@ public class YxxMpOrderService {
         this.commentMapper = commentMapper;
         this.commentLabelMapper = commentLabelMapper;
     }
-
-//            long count = yxxOrderMapper.countByExample(new YxxOrderExample().createCriteria()
-//                .andMemberIdEqualTo(member.getId()).example());
-//        if (count < 1L) {
-//            // 第一次 下单 -> 保存更新用户信息 ，地址信息
-////            member.setPhone(orderParam.getTelephone());
-////            member.setAddress(orderParam.getAddress());
-////            member.setSex(orderParam.getSex());
-//            // 部分更新
-//            memberMapper.updateByPrimaryKeySelective(member, YxxMember.Column.phone, YxxMember.Column.address, YxxMember.Column.sex);
-//        }
 
     /**
      * 小程序下单
@@ -251,6 +241,9 @@ public class YxxMpOrderService {
         YxxMember currentMember = memberService.getCurrentMember();
         PageHelper.startPage(pageNum, pageSize);
         List<YxxOrderInfo> orderInfoList = orderCommonDao.queryList(currentMember.getId(), getOrderStatusArray(status));
+        orderInfoList.forEach(item -> {
+            item.setOrderStatusName(OrderStatusUtil.getStatusName(item.getOrderStatus()));
+        });
         return CommonPage.restPage(orderInfoList);
     }
 

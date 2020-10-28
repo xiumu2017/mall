@@ -42,7 +42,12 @@ public class YxxOrderCommonService {
     private final PmsProductMapper productMapper;
 
     private YxxWorkerOrderCount countByWorkerId(Long workerId) {
-        return workerOrderCountMapper.selectByPrimaryKey(workerId);
+        YxxWorkerOrderCount count = workerOrderCountMapper.selectByPrimaryKey(workerId);
+        if (count == null) {
+            count = YxxWorkerOrderCount.builder().assignAmount(0).distributeAmount(0).rushAmount(0).workerId(workerId).build();
+            workerOrderCountMapper.insert(count);
+        }
+        return count;
     }
 
     private YxxWorkerLevel getLevel(Integer levelId) {
@@ -68,6 +73,21 @@ public class YxxOrderCommonService {
             return workerLevel.getOrderAssignAmount() >= count.getAssignAmount() + 1;
         }
         return true;
+    }
+
+    public int updateWorkerOrderCount(Long workerId, YxxOrder order) {
+        // 判断订单类型
+        if (order.getOrderType() == OrderType.SYSTEM_DISTRIBUTE.val()) {
+            // 系统分配订单
+            return orderCommonDao.updateWorkerOrderDistributeCount(workerId);
+        }
+        if (order.getOrderType() == OrderType.SYSTEM_RUSH.val()) {
+            return orderCommonDao.updateWorkerOrderRushCount(workerId);
+        }
+        if (order.getOrderType() == OrderType.MANUAL_DISTRIBUTE.val()) {
+            return orderCommonDao.updateWorkerOrderAssignCount(workerId);
+        }
+        return 0;
     }
 
     public YxxOrderDetail detail(Long orderId) {
@@ -171,7 +191,7 @@ public class YxxOrderCommonService {
             return new ArrayList<>();
         }
         PageHelper.startPage(pageNum, pageSize);
-        List<YxxOrderInfo> orderInfoList = orderCommonDao.queryRushOrders(ids, DISTRIBUTED.val());
+        List<YxxOrderInfo> orderInfoList = orderCommonDao.queryRushOrders(ids, DISTRIBUTING.val());
         this.dealStatusDesc(orderInfoList);
         return orderInfoList;
     }

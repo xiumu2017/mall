@@ -20,7 +20,7 @@ import static com.macro.mall.common.constant.RedisKeyConstant.*;
 @Component
 public class DistributorService {
 
-    public static final int MAX_COUNTER = 7;
+    private static final int MAX_COUNTER = 7;
     private final RedisService redisService;
 
     public DistributorService(RedisService redisService) {
@@ -79,7 +79,7 @@ public class DistributorService {
         }
     }
 
-    private int getCounterValue() {
+    public int getCounterValue() {
         if (redisService.get(ORDER_COUNTER) == null) {
             redisService.set(ORDER_COUNTER, 0);
         }
@@ -178,6 +178,26 @@ public class DistributorService {
     public List<Long> getRushOrderIds() {
         // redis 查询rush订单列表
         List<Object> objectList = redisService.lRange(RedisKeyConstant.ORDER_RUSH_QUEUE, 0, -1);
+        return getLongs(objectList);
+    }
+
+    /**
+     * 查询派单队列中的订单ID
+     *
+     * @return 订单ID
+     */
+    public List<Long> getOrderIds() {
+        // redis 查询rush订单列表
+        List<Object> objectList = redisService.lRange(ORDER_QUEUE, 0, -1);
+        return getLongs(objectList);
+    }
+
+    public List<Long> getWorkerIds(Long orderId) {
+        List<Object> objectList = redisService.lRange(ORDER_WORKER_QUEUE + orderId, 0, -1);
+        return getLongs(objectList);
+    }
+
+    private List<Long> getLongs(List<Object> objectList) {
         if (objectList.isEmpty()) {
             return new ArrayList<>();
         }

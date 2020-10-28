@@ -74,4 +74,28 @@ public interface YxxOrderCommonDao {
      * @return update res
      */
     int updateProductCommentLabel(@Param("productId") Long productId, @Param("label") String label);
+
+    /**
+     * 更新抢单数量 + 1
+     *
+     * @param workerId 维修工ID
+     * @return res
+     */
+    int updateWorkerOrderRushCount(Long workerId);
+
+    /**
+     * 更新系统分派订单数量 +1
+     *
+     * @param workerId 维修工ID
+     * @return res
+     */
+    int updateWorkerOrderDistributeCount(Long workerId);
+
+    /**
+     * 更新指派订单数量 +1
+     *
+     * @param workerId 维修工ID
+     * @return res
+     */
+    int updateWorkerOrderAssignCount(Long workerId);
 }

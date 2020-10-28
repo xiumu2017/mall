@@ -17,10 +17,11 @@ public interface CommonZoneDao {
     /**
      * 查询区域服务中心下的维修工
      *
-     * @param zoneId 区域服务中心ID
+     * @param zoneId  区域服务中心ID
+     * @param keyword 关键词搜索
      * @return {@link ZoneWorkerInfo}
      */
-    List<ZoneWorkerInfo> queryWorkersByZoneId(@Param("zoneId") Long zoneId);
+    List<ZoneWorkerInfo> queryWorkersByZoneId(@Param("zoneId") Long zoneId, @Param("keyword") String keyword);
 
     /**
      * 查询区域服务中心擅长品类列表
