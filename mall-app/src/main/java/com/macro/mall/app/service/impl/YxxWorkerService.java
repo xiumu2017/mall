@@ -217,15 +217,7 @@ public class YxxWorkerService {
     }
 
     public int updateInfo(YxxWorkerUpdateParam worker) {
-        // 验证用户名唯一性
         YxxWorker yxxWorker = getCurrentWorker();
-        if (!yxxWorker.getUsername().equals(worker.getUsername())) {
-            YxxWorker ow = this.getByUsername(worker.getUsername());
-            if (ow != null && ow.getId().equals(yxxWorker.getId())) {
-                Asserts.fail("用户名已存在");
-                return 0;
-            }
-        }
         BeanUtils.copyProperties(worker, yxxWorker);
         yxxWorker.setUpdateTime(new Date());
         return workerMapper.updateByPrimaryKeySelective(yxxWorker);

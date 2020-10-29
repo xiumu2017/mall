@@ -1,6 +1,9 @@
-package com.macro.mall.common.exception;
+package com.macro.mall.security.config;
 
 import com.macro.mall.common.api.CommonResult;
+import com.macro.mall.common.exception.ApiException;
+import com.macro.mall.common.exception.ParamValidateFailException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -22,6 +25,12 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public CommonResult handleParamValidateFail(ParamValidateFailException exception) {
         return CommonResult.validateFailed(exception.getMessage());
+    }
+
+    @ResponseBody
+    @ExceptionHandler(value = UsernameNotFoundException.class)
+    public CommonResult handleUsernameNotFoundException(UsernameNotFoundException exception) {
+        return CommonResult.unauthorized(exception.getMessage());
     }
 
     @ResponseBody
