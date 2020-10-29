@@ -3,19 +3,15 @@ package com.macro.mall.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.github.pagehelper.PageHelper;
 import com.macro.mall.dao.PmsProductDao;
-import com.macro.mall.dao.PmsProductVertifyRecordDao;
 import com.macro.mall.domain.PmsProductInfo;
 import com.macro.mall.dto.PmsProductParam;
 import com.macro.mall.dto.PmsProductQueryParam;
 import com.macro.mall.example.PmsProductExample;
 import com.macro.mall.example.PmsProductSkuExample;
-import com.macro.mall.mapper.PmsProductMapper;
-import com.macro.mall.mapper.PmsProductSkuMapper;
-import com.macro.mall.mapper.YxxProductChargeStandardMapper;
-import com.macro.mall.model.PmsProduct;
-import com.macro.mall.model.PmsProductSku;
-import com.macro.mall.model.PmsProductVertifyRecord;
-import com.macro.mall.model.YxxProductChargeStandard;
+import com.macro.mall.example.YxxHomeQaExample;
+import com.macro.mall.example.YxxProductQaExample;
+import com.macro.mall.mapper.*;
+import com.macro.mall.model.*;
 import com.macro.mall.service.PmsProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +37,8 @@ public class PmsProductServiceImpl implements PmsProductService {
     private final PmsProductSkuMapper productSkuMapper;
     private final PmsProductDao productDao;
     private final YxxProductChargeStandardMapper standardMapper;
+    private final YxxProductQaMapper productQaMapper;
+    private final YxxHomeQaMapper homeQaMapper;
 
     @Override
     public int create(PmsProductParam productParam) {
@@ -55,12 +53,25 @@ public class PmsProductServiceImpl implements PmsProductService {
         productParam.setCreateTime(new Date());
         productParam.setUpdateTime(new Date());
         productMapper.insertSelective(productParam);
+        // 保存 QA信息
         //根据促销类型设置价格：会员价格、阶梯价格、满减价格
         Long productId = productParam.getId();
+        this.handleQa(productId, productParam.getQaIds());
         //处理sku的编码
         handleSkuStockCode(productParam.getProductSkuList(), productId);
         //添加sku库存信息
         return productSkuMapper.batchInsert(productParam.getProductSkuList());
+    }
+
+    private void handleQa(Long productId, List<Long> qaIds) {
+        if (qaIds != null && !qaIds.isEmpty()) {
+            List<YxxProductQa> qaList = new ArrayList<>();
+            for (Long id : qaIds) {
+                qaList.add(YxxProductQa.builder().productId(productId).qaId(id).build());
+            }
+            productQaMapper.batchInsert(qaList);
+        }
+
     }
 
     /**
@@ -103,6 +114,9 @@ public class PmsProductServiceImpl implements PmsProductService {
             }
         }
         productMapper.updateByPrimaryKeySelective(productParam);
+        // 先删除原有关联QA，再新建
+        productQaMapper.deleteByExample(new YxxProductQaExample().createCriteria().andProductIdEqualTo(id).example());
+        this.handleQa(id, productParam.getQaIds());
         //修改sku库存信息
         handleUpdateSkuStockList(id, productParam);
         count = 1;
@@ -180,8 +194,14 @@ public class PmsProductServiceImpl implements PmsProductService {
         PmsProduct product = productMapper.selectByPrimaryKey(id);
         //获取商品SKU库存信息
         List<PmsProductSku> skuList = productSkuMapper.selectByExample(new PmsProductSkuExample().createCriteria().andProductIdEqualTo(id).example());
+        List<YxxProductQa> productQaList = productQaMapper.selectByExample(new YxxProductQaExample().createCriteria().andProductIdEqualTo(id).example());
+        List<Long> ids = new ArrayList<>();
+        productQaList.forEach(item -> ids.add(item.getQaId()));
+        List<YxxHomeQa> qaList = homeQaMapper.selectByExample(new YxxHomeQaExample().createCriteria().andIdIn(ids).andEnableEqualTo(1)
+                .andDeletedEqualTo(0).example().orderBy(YxxHomeQa.Column.orderNum.asc()));
         map.put("product", product);
         map.put("skuList", skuList);
+        map.put("qaList", qaList);
         return map;
     }
 

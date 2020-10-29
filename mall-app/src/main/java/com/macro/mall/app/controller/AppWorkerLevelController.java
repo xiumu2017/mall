@@ -22,18 +22,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/level")
 @AllArgsConstructor
-public class AppOrderLevelController {
+public class AppWorkerLevelController {
     private final YxxOrderCommonService orderCommonService;
     private final YxxWorkerService workerService;
 
-    @ApiOperation("查询全部会员列表")
+    @ApiOperation("查询全部会员等级列表")
     @GetMapping("/list")
     public CommonResult<List<YxxWorkerLevel>> queryLevelList() {
         return CommonResult.success(orderCommonService.getLevelList());
     }
 
 
-    @ApiOperation("查询当前会员属性")
+    @ApiOperation("查询当前会员等级属性")
     @GetMapping("/current")
     public CommonResult<YxxWorkerLevel> queryLevel() {
         YxxWorker worker = workerService.getCurrentWorker();

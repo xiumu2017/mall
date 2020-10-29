@@ -52,6 +52,21 @@ public class YxxOrderCommonService {
         return count;
     }
 
+    public YxxWorkerOrderCount countLeftByWorkerId(YxxWorker worker) {
+        YxxWorkerOrderCount leftCount = new YxxWorkerOrderCount();
+        if (worker == null || worker.getLevelId() == null) {
+            return leftCount;
+        }
+        YxxWorkerLevel workerLevel = this.getLevel(worker.getLevelId());
+        YxxWorkerOrderCount count = this.countByWorkerId(worker.getId());
+        leftCount.setWorkerId(worker.getId());
+        leftCount.setAssignAmount(workerLevel.getOrderAssignAmount() - count.getAssignAmount());
+        leftCount.setDistributeAmount(workerLevel.getOrderDistributeAmount() - count.getDistributeAmount());
+        leftCount.setRushAmount(workerLevel.getOrderRushAmount() - count.getRushAmount());
+        leftCount.setRushAmountBargain(workerLevel.getOrderRushAmountBargain() - count.getRushAmountBargain());
+        return leftCount;
+    }
+
     public YxxWorkerLevel getLevel(Integer levelId) {
         return workerLevelMapper.selectByPrimaryKey(levelId);
     }

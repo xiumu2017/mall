@@ -68,28 +68,6 @@ public class AdminProductController {
         return CommonResult.success(productService.detail(id));
     }
 
-    @ApiIgnore
-    @ApiOperation("根据服务品类名称或货号模糊查询")
-    @RequestMapping(value = "/simpleList", method = RequestMethod.GET)
-    public CommonResult<List<PmsProduct>> getList(String keyword) {
-        List<PmsProduct> productList = productService.list(keyword);
-        return CommonResult.success(productList);
-    }
-
-
-    @ApiIgnore
-    @ApiOperation("批量上下架")
-    @RequestMapping(value = "/update/publishStatus", method = RequestMethod.POST)
-    public CommonResult updatePublishStatus(@RequestParam("ids") List<Long> ids,
-                                            @RequestParam("publishStatus") Integer publishStatus) {
-        int count = productService.updatePublishStatus(ids, publishStatus);
-        if (count > 0) {
-            return CommonResult.success(count);
-        } else {
-            return CommonResult.failed();
-        }
-    }
-
     @ApiOperation(value = "批量推荐服务品类")
     @RequestMapping(value = "/update/recommendStatus", method = RequestMethod.POST)
     public CommonResult updateRecommendStatus(@RequestParam("ids") List<Long> ids,

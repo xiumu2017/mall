@@ -21,4 +21,9 @@ public class PmsProductParam extends PmsProduct {
     @ApiModelProperty("商品的SKU规格信息")
     private List<PmsProductSku> productSkuList;
 
+    /**
+     * QA id 数组
+     */
+    @ApiModelProperty("QA id 数组")
+    private List<Long> qaIds;
 }

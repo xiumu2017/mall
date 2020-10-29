@@ -1,6 +1,7 @@
 package com.macro.mall.app.service.impl;
 
 import com.macro.mall.app.dao.WorkerSkilledProductDao;
+import com.macro.mall.app.domain.AppWorkerInfo;
 import com.macro.mall.app.domain.WorkerDetails;
 import com.macro.mall.app.domain.WorkerSkilledProductInfo;
 import com.macro.mall.app.domain.YxxWorkerUpdateParam;
@@ -11,6 +12,7 @@ import com.macro.mall.example.YxxWorkerCertificateExample;
 import com.macro.mall.example.YxxWorkerExample;
 import com.macro.mall.example.YxxWorkerSkilledProductExample;
 import com.macro.mall.mapper.YxxWorkerCertificateMapper;
+import com.macro.mall.mapper.YxxWorkerLevelMapper;
 import com.macro.mall.mapper.YxxWorkerMapper;
 import com.macro.mall.mapper.YxxWorkerSkilledProductMapper;
 import com.macro.mall.model.YxxWorker;
@@ -49,18 +51,7 @@ public class YxxWorkerService {
     private final YxxWorkerCertificateMapper certificateMapper;
     private final WorkerSkilledProductDao skilledProductDao;
     private final YxxWorkerSkilledProductMapper skilledProductMapper;
-
-    private YxxWorker getByUsername(String username) {
-        YxxWorker member;
-        YxxWorkerExample example = new YxxWorkerExample();
-        example.createCriteria().andUsernameEqualTo(username);
-        List<YxxWorker> memberList = workerMapper.selectByExample(example);
-        if (!CollectionUtils.isEmpty(memberList)) {
-            member = memberList.get(0);
-            return member;
-        }
-        return null;
-    }
+    private final YxxWorkerLevelMapper workerLevelMapper;
 
     private YxxWorker getByPhone(String phone) {
         return workerMapper.selectOneByExample(new YxxWorkerExample().createCriteria().andPhoneEqualTo(phone).example());
@@ -148,6 +139,14 @@ public class YxxWorkerService {
         Authentication auth = ctx.getAuthentication();
         WorkerDetails workerDetails = (WorkerDetails) auth.getPrincipal();
         return workerDetails.getYxxWorker();
+    }
+
+    public AppWorkerInfo getWorkerInfo() {
+        YxxWorker worker = this.getCurrentWorker();
+        AppWorkerInfo workerInfo = new AppWorkerInfo();
+        BeanUtils.copyProperties(worker, workerInfo);
+        workerInfo.setWorkerLevel(workerLevelMapper.selectByPrimaryKey(workerInfo.getLevelId()));
+        return workerInfo;
     }
 
     /**

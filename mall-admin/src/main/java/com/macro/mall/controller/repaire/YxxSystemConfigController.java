@@ -92,8 +92,8 @@ public class YxxSystemConfigController {
     }
 
     @ApiOperation("根据区域ID查询首页轮播图列表")
-    @GetMapping("/banner/list/{regionId}")
-    public CommonResult<List<YxxHomeBanner>> bannerList(@PathVariable Long regionId) {
+    @GetMapping("/banner/list")
+    public CommonResult<List<YxxHomeBanner>> bannerList(@RequestParam(required = false) Long regionId) {
         YxxHomeBannerExample example = new YxxHomeBannerExample();
         example.createCriteria().andDeletedEqualTo(0).andRegionIdEqualTo(regionId);
         example.setOrderByClause("sort");
@@ -122,11 +122,12 @@ public class YxxSystemConfigController {
     }
 
     @ApiOperation("根据区域ID查询首页QA列表")
-    @GetMapping("/qa/list/{regionId}")
-    public CommonResult<List<YxxHomeQa>> qaList(@PathVariable Long regionId) {
+    @GetMapping("/qa/list")
+    public CommonResult<List<YxxHomeQa>> qaList(@RequestParam(required = false) Long regionId) {
         YxxHomeQaExample example = new YxxHomeQaExample();
-        example.createCriteria().andDeletedEqualTo(0).andRegionIdEqualTo(regionId);
-        example.setOrderByClause("sort");
+        example.createCriteria().andDeletedEqualTo(0).
+                when(regionId != null, criteria -> criteria.andRegionIdEqualTo(regionId));
+        example.setOrderByClause(YxxHomeQa.Column.orderNum.asc());
         List<YxxHomeQa> list = yxxHomeQaMapper.selectByExample(example);
         return CommonResult.success(list);
     }

@@ -11,6 +11,7 @@ import com.macro.mall.domain.YxxOrderInfo;
 import com.macro.mall.enums.OrderStatusUtil;
 import com.macro.mall.model.YxxRepairRecord;
 import com.macro.mall.model.YxxWorker;
+import com.macro.mall.model.YxxWorkerOrderCount;
 import com.macro.mall.service.YxxOrderCommonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -42,6 +43,14 @@ public class YxxAppOrderController {
         this.yxxAppOrderService = yxxAppOrderService;
         this.orderCommonService = orderCommonService;
         this.workerService = workerService;
+    }
+
+    @ApiOperation("查询订单剩余量")
+    @GetMapping("/count/left")
+    public CommonResult<YxxWorkerOrderCount> queryOrderLeftCount() {
+        YxxWorker worker = workerService.getCurrentWorker();
+        YxxWorkerOrderCount count = orderCommonService.countLeftByWorkerId(worker);
+        return CommonResult.success(count);
     }
 
     @ApiOperation("查询 - 分页获取订单列表")

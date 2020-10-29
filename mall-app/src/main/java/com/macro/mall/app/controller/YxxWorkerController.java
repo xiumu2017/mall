@@ -1,8 +1,8 @@
 package com.macro.mall.app.controller;
 
+import com.macro.mall.app.domain.AppWorkerInfo;
 import com.macro.mall.app.service.impl.YxxWorkerService;
 import com.macro.mall.common.api.CommonResult;
-import com.macro.mall.model.YxxWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -67,11 +67,11 @@ public class YxxWorkerController {
 
     @ApiOperation("获取维修工信息")
     @RequestMapping(value = "/info", method = RequestMethod.GET)
-    public CommonResult<YxxWorker> info(@ApiIgnore Principal principal) {
+    public CommonResult<AppWorkerInfo> info(@ApiIgnore Principal principal) {
         if (principal == null) {
             return CommonResult.unauthorized(null);
         }
-        YxxWorker member = workerService.getCurrentWorker();
+        AppWorkerInfo member = workerService.getWorkerInfo();
         return CommonResult.success(member);
     }
 
@@ -109,8 +109,8 @@ public class YxxWorkerController {
     @ApiOperation("忘记密码")
     @RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
     public CommonResult resetPassword(@RequestParam String telephone,
-                                       @RequestParam String password,
-                                       @RequestParam String authCode) {
+                                      @RequestParam String password,
+                                      @RequestParam String authCode) {
         workerService.resetPass(telephone, password, authCode);
         return CommonResult.success(null, "密码修改成功");
     }
@@ -124,7 +124,7 @@ public class YxxWorkerController {
         if (refreshToken == null) {
             return CommonResult.failed("token已经过期！");
         }
-        Map<String, String> tokenMap = new HashMap<>();
+        Map<String, String> tokenMap = new HashMap<>(2);
         tokenMap.put("token", refreshToken);
         tokenMap.put("tokenHead", tokenHead);
         return CommonResult.success(tokenMap);

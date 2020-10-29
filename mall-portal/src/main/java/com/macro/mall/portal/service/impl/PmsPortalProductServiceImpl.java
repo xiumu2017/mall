@@ -2,26 +2,20 @@ package com.macro.mall.portal.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
+import com.macro.mall.domain.PmsProductInfo;
 import com.macro.mall.example.PmsProductCategoryExample;
-import com.macro.mall.example.PmsProductExample;
-import com.macro.mall.example.PmsProductSkuExample;
-import com.macro.mall.example.YxxProductCommentLabelExample;
-import com.macro.mall.mapper.PmsProductCategoryMapper;
-import com.macro.mall.mapper.PmsProductMapper;
-import com.macro.mall.mapper.PmsProductSkuMapper;
-import com.macro.mall.mapper.YxxProductCommentLabelMapper;
-import com.macro.mall.model.PmsProduct;
-import com.macro.mall.model.PmsProductCategory;
-import com.macro.mall.model.YxxProductCommentLabel;
+import com.macro.mall.example.*;
+import com.macro.mall.mapper.*;
+import com.macro.mall.model.*;
 import com.macro.mall.portal.dao.PortalProductDao;
 import com.macro.mall.portal.domain.PmsProductCategoryNode;
 import com.macro.mall.portal.domain.PmsProductDetail;
-import com.macro.mall.domain.PmsProductInfo;
 import com.macro.mall.portal.service.PmsPortalProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +33,8 @@ public class PmsPortalProductServiceImpl implements PmsPortalProductService {
     private final PmsProductSkuMapper productSkuMapper;
     private final PortalProductDao portalProductDao;
     private final YxxProductCommentLabelMapper commentLabelMapper;
+    private final YxxHomeQaMapper homeQaMapper;
+    private final YxxProductQaMapper productQaMapper;
 
     @Override
     public List<PmsProduct> search(String keyword, Long productCategoryId, Integer pageNum, Integer pageSize) {
@@ -83,6 +79,12 @@ public class PmsPortalProductServiceImpl implements PmsPortalProductService {
                         andEnableEqualTo(1).example().orderBy(YxxProductCommentLabel.Column.sort.desc())
         );
         result.setCommentLabelList(commentLabelList);
+        // 查询服务品类QA列表
+        List<YxxProductQa> productQaList = productQaMapper.selectByExample(new YxxProductQaExample().createCriteria().andProductIdEqualTo(id).example());
+        List<Long> ids = new ArrayList<>();
+        productQaList.forEach(item -> ids.add(item.getQaId()));
+        List<YxxHomeQa> qaList = homeQaMapper.selectByExample(new YxxHomeQaExample().createCriteria().andIdIn(ids).andEnableEqualTo(1)
+                .andDeletedEqualTo(0).example().orderBy(YxxHomeQa.Column.orderNum.asc()));
         return result;
     }
 
